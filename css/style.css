@@ -10,12 +10,12 @@ body{
 }
 
 #header_wrapper{
-	background: lightgray;
+	background: #4c5966;
 }
 
 header{	
-	background: lightgray;
-	color: gray;
+	background: #4c5966;
+	color: lightgray;
 	margin: auto;
 	width: 900px;
 	padding: 20px;
@@ -87,7 +87,6 @@ code{
 	padding: 1.0em;
 	line-height: 1.2em;
 	border-radius: 6px;
-	
 }
 
 li code, p code{
@@ -98,7 +97,7 @@ li code, p code{
 	line-height: 1.6em;
 }
 
-.bash {
+.bash, .Bash{
 	background: #4c5966;
 	color: white;
 }
@@ -164,6 +163,18 @@ a:visited {
 a:hover {
     color: lightseagreen;
 }
+
+
+header a:link {
+    color: lightgray;
+}
+header a:visited {
+    color: lightgray;
+}
+header a:hover {
+    color: white;
+}
+
 
 /* --------------- */
 
