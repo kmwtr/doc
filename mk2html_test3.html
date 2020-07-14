@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="./css/style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<h1 id="h6-memorymap-register-baseaddress">H6 Memorymap (Register BaseAddress)</h1>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Address (It is for Cluster CPU)</th>
+<th>Size(Bytes)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>N-BROM</td>
+<td>0x0000 0000 --- 0x0000 9FFF</td>
+<td>40K</td>
+</tr>
+<tr>
+<td>S-BROM</td>
+<td>0x0000 0000 --- 0x0000 FFFF</td>
+<td>64K</td>
+</tr>
+<tr>
+<td>SRAM A1</td>
+<td>0x0002 0000 --- 0x0002 7FFF</td>
+<td>32K</td>
+</tr>
+<tr>
+<td>SRAM C</td>
+<td>0x0002 8000 --- 0x0004 5FFF</td>
+<td>120K</td>
+</tr>
+<tr>
+<td>SRAM A2</td>
+<td>0x0010 0000 --- 0x0010 3FFF</td>
+<td>16K</td>
+</tr>
+<tr>
+<td>"</td>
+<td>0x0010 4000 --- 0x0011 7FFF</td>
+<td>80K</td>
+</tr>
+<tr>
+<td>DE</td>
+<td>0x0100 0000 --- 0x013F FFFF</td>
+<td>4M</td>
+</tr>
+<tr>
+<td>DI0</td>
+<td>0x0142 0000 --- 0x0143 FFFF</td>
+<td>128K</td>
+</tr>
+<tr>
+<td>GPU</td>
+<td>0x0180 0000 --- 0x0183 FFFF</td>
+<td>256K</td>
+</tr>
+<tr>
+<td>CE_NS</td>
+<td>0x0190 4000 --- 0x0190 47FF</td>
+<td>2K</td>
+</tr>
+<tr>
+<td>CE_S</td>
+<td>0x0190 4800 --- 0x0190 4FFF</td>
+<td>2K</td>
+</tr>
+<tr>
+<td>EMCE</td>
+<td>0x0190 5000 --- 0x0190 5FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>CE_KEY_SRAM</td>
+<td>0x0190 8000 --- 0x0190 8FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>VE SRAM</td>
+<td>0x01A0 0000 --- 0x01BF FFFF</td>
+<td>2M</td>
+</tr>
+<tr>
+<td>VP9</td>
+<td>0x01C0 0000 --- 0x01C0 0FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>VE</td>
+<td>0x01C0 E000 --- 0x01C0 FFFF</td>
+<td>8K</td>
+</tr>
+<tr>
+<td>SYS_CFG</td>
+<td>0x0300 0000 --- 0x0300 0FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>CCU</td>
+<td>0x0300 1000 --- 0x0300 1FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>DMAC</td>
+<td>0x0300 2000 --- 0x0300 2FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>MSGBOX</td>
+<td>0x0300 3000 --- 0x0300 3FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>SPINLOCK</td>
+<td>0x0300 4000 --- 0x0300 4FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>HSTIMER</td>
+<td>0x0300 5000 --- 0x0300 5FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>SID</td>
+<td>0x0300 6000 --- 0x0300 6FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>TIMER</td>
+<td>0x0300 9000 --- 0x0300 93FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>PWM</td>
+<td>0x0300 A000 --- 0x0300 A3FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>GPIO</td>
+<td>0x0300 B000 --- 0x0300 B3FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>PSI</td>
+<td>0x0300 C000 --- 0x0300 C3FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>DCU</td>
+<td>0x0301 0000 --- 0x0301 FFFF</td>
+<td>64K</td>
+</tr>
+<tr>
+<td>GIC</td>
+<td>0x0302 0000 --- 0x0302 FFFF</td>
+<td>64K</td>
+</tr>
+<tr>
+<td>IOMMU</td>
+<td>0x030F 0000 --- 0x030F FFFF</td>
+<td>64K</td>
+</tr>
+<tr>
+<td>DRAM_CTRL</td>
+<td>0x0400 2000 --- 0x0400 5FFF</td>
+<td>16K</td>
+</tr>
+<tr>
+<td>NAND0</td>
+<td>0x0401 1000 --- 0x0401 1FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>SMHC0</td>
+<td>0x0402 0000 --- 0x0402 0FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>SMHC1</td>
+<td>0x0402 1000 --- 0x0402 1FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>SMHC2</td>
+<td>0x0402 2000 --- 0x0402 2FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>UART0</td>
+<td>0x0500 0000 --- 0x0500 03FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>UART1</td>
+<td>0x0500 0400 --- 0x0500 07FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>UART2</td>
+<td>0x0500 0800 --- 0x0500 0BFF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>UART3</td>
+<td>0x0500 0C00 --- 0x0500 0FFF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>TWI0</td>
+<td>0x0500 2000 --- 0x0500 23FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>TWI1</td>
+<td>0x0500 2400 --- 0x0500 27FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>TWI2</td>
+<td>0x0500 2800 --- 0x0500 2BFF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>TWI3</td>
+<td>0x0500 2C00 --- 0x0500 2FFF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>SCR0</td>
+<td>0x0500 5000 --- 0x0500 53FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>SCR1</td>
+<td>0x0500 5400 --- 0x0500 57FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>SPI0</td>
+<td>0x0501 0000 --- 0x0501 0FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>SPI1</td>
+<td>0x0501 1000 --- 0x0501 1FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>EMAC</td>
+<td>0x0502 0000 --- 0x0502 FFFF</td>
+<td>64K</td>
+</tr>
+<tr>
+<td>TS0</td>
+<td>0x0506 0000 --- 0x0506 0FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>THS</td>
+<td>0x0507 0400 --- 0x0507 07FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>CIR_TX</td>
+<td>0x0507 1000 --- 0x0507 13FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>I2S/PCM3</td>
+<td>0x0508 F000 --- 0x0508 FFFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>I2S/PCM0</td>
+<td>0x0509 0000 --- 0x0509 0FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>I2S/PCM1</td>
+<td>0x0509 1000 --- 0x0509 1FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>I2S/PCM2</td>
+<td>0x0509 2000 --- 0x0509 2FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>OWA</td>
+<td>0x0509 3000 --- 0x0509 33FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>DMIC</td>
+<td>0x0509 5000 --- 0x0509 53FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>Audio HUB</td>
+<td>0x0509 7000 --- 0x0509 7FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>USB0(USB2.0_OTG)</td>
+<td>0x0510 0000 --- 0x051F FFFF</td>
+<td>1M</td>
+</tr>
+<tr>
+<td>USB1(USB3.0_HOST)</td>
+<td>0x0520 0000 --- 0x052F FFFF</td>
+<td>1M</td>
+</tr>
+<tr>
+<td>USB3(USB2.0_HOST)</td>
+<td>0x0531 1000 --- 0x0531 1FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>PCIe</td>
+<td>0x0540 0000 --- 0x054F FFFF</td>
+<td>1M</td>
+</tr>
+<tr>
+<td>HDMI_TX0(1.4/2.0)</td>
+<td>0x0600 0000 --- 0x060F FFFF</td>
+<td>1M</td>
+</tr>
+<tr>
+<td>DISP_IF_TOP</td>
+<td>0x0651 0000 --- 0x0651 0FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>TCON_LCD</td>
+<td>0x0651 1000 --- 0x0651 1FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>TCON_TV</td>
+<td>0x0651 5000 --- 0x0651 5FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>CSI_SRAM</td>
+<td>0x0660 0000 --- 0x0661 FFFF</td>
+<td>128K</td>
+</tr>
+<tr>
+<td>CSI</td>
+<td>0x0662 0000 --- 0x0663 FFFF</td>
+<td>128K</td>
+</tr>
+<tr>
+<td>RTC</td>
+<td>0x0700 0000 --- 0x0700 03FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>R_CPUS_CFG</td>
+<td>0x0700 0400 --- 0x0700 0BFF</td>
+<td>2K</td>
+</tr>
+<tr>
+<td>R_PRCM</td>
+<td>0x0701 0000 --- 0x0701 03FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>R_TIMER</td>
+<td>0x0702 0000 --- 0x0702 03FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>R_WDOG</td>
+<td>0x0702 0400 --- 0x0702 07FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>R_TWDOG</td>
+<td>0x0702 0800 --- 0x0702 0BFF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>R_PWM</td>
+<td>0x0702 0C00 --- 0x0702 0FFF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>R_INTC</td>
+<td>0x0702 1000 --- 0x0702 13FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>R_GPIO</td>
+<td>0x0702 2000 --- 0x0702 23FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>R_CIR_RX</td>
+<td>0x0704 0000 --- 0x0704 03FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>R_OWC</td>
+<td>0x0704 0400 --- 0x0704 07FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>R_UART</td>
+<td>0x0708 0000 --- 0x0708 03FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>R_TWI</td>
+<td>0x0708 1400 --- 0x0708 17FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>CPU_SYS_CFG</td>
+<td>0x0810 0000 --- 0x0810 03FF</td>
+<td>1K</td>
+</tr>
+<tr>
+<td>CNT_R</td>
+<td>0x0811 0000 --- 0x0811 0FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>CNT_C</td>
+<td>0x0812 0000 --- 0x0812 0FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>C0_CPUX_CFG</td>
+<td>0x0901 0000 --- 0x0901 0FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>C0_CPUX_MBIST</td>
+<td>0x0902 0000 --- 0x0902 0FFF</td>
+<td>4K</td>
+</tr>
+<tr>
+<td>DRAM SPACE</td>
+<td>0x4000 0000 --- 0xFFFF FFFF</td>
+<td>3G</td>
+</tr>
+</tbody>
+</table>
+<p>64bit CPU であるにも関わらず DRAM SPACE が 3GB しか無い。</p>
+<blockquote>
+<p>SID address space starts at 0x03006000, but e-fuse is at offset 0x200<br>
+<a href="https://github.com/linux-sunxi/u-boot-sunxi/blob/0b80e1c63d5ff9585c79afff1092cf761cea46cc/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h">u-boot-sunxi/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h</a></p>
+</blockquote>
+<p>cpu_sun50i_h6.h</p>
+<pre><code class="C">#ifndef _SUNXI_CPU_SUN50I_H6_H
+#define _SUNXI_CPU_SUN50I_H6_H
+
+#define SUNXI_SRAM_A1_BASE      CONFIG_SUNXI_SRAM_ADDRESS
+#define SUNXI_SRAM_C_BASE       0x00028000
+#define SUNXI_SRAM_A2_BASE      0x00100000
+
+#define SUNXI_DE3_BASE          0x01000000
+#define SUNXI_SS_BASE           0x01904000
+#define SUNXI_EMCE_BASE         0x01905000
+
+#define SUNXI_SRAMC_BASE        0x03000000
+#define SUNXI_CCM_BASE          0x03001000
+#define SUNXI_DMA_BASE          0x03002000
+/* SID address space starts at 0x03006000, but e-fuse is at offset 0x200 */
+#define SUNXI_SIDC_BASE         0x03006000
+#define SNUXI_SID_BASE          0x03006200
+#define SUNXI_TIMER_BASE        0x03009000
+#define SUNXI_PIO_BASE          0x0300B000
+#define SUNXI_PSI_BASE          0x0300C000
+
+#define SUNXI_GIC400_BASE       0x03020000
+#define SUNXI_IOMMU_BASE        0x030F0000
+
+#define SUNXI_DRAM_COM_BASE     0x04002000
+#define SUNXI_DRAM_CTL0_BASE        0x04003000
+#define SUNXI_DRAM_PHY0_BASE        0x04005000
+#define SUNXI_NFC_BASE          0x04011000
+#define SUNXI_MMC0_BASE         0x04020000
+#define SUNXI_MMC1_BASE         0x04021000
+#define SUNXI_MMC2_BASE         0x04022000
+
+#define SUNXI_UART0_BASE        0x05000000
+#define SUNXI_UART1_BASE        0x05000400
+#define SUNXI_UART2_BASE        0x05000800
+#define SUNXI_UART3_BASE        0x05000C00
+#define SUNXI_TWI0_BASE         0x05002000
+#define SUNXI_TWI1_BASE         0x05002400
+#define SUNXI_TWI2_BASE         0x05002800
+#define SUNXI_TWI3_BASE         0x05002C00
+#define SUNXI_SPI0_BASE         0x05010000
+#define SUNXI_SPI1_BASE         0x05011000
+#define SUNXI_GMAC_BASE         0x05020000
+#define SUNXI_USB0_BASE         0x05100000
+#define SUNXI_XHCI_BASE         0x05200000
+#define SUNXI_USB3_BASE         0x05311000
+#define SUNXI_PCIE_BASE         0x05400000
+
+#define SUNXI_HDMI_BASE         0x06000000
+#define SUNXI_TCON_TOP_BASE     0x06510000
+#define SUNXI_TCON_LCD0_BASE        0x06511000
+#define SUNXI_TCON_TV0_BASE     0x06515000
+
+#define SUNXI_RTC_BASE          0x07000000
+#define SUNXI_R_CPUCFG_BASE     0x07000400
+#define SUNXI_PRCM_BASE         0x07010000
+#define SUNXI_R_PIO_BASE        0x07022000
+#define SUNXI_R_UART_BASE       0x07080000
+#define SUNXI_R_TWI_BASE        0x07081400
+
+#ifndef __ASSEMBLY__
+void sunxi_board_init(void);
+void sunxi_reset(void);
+int sunxi_get_sid(unsigned int *sid);
+#endif
+
+#endif /* _SUNXI_CPU_SUN9I_H */
+
+</code></pre>
+
+<p>clock_sun50i_h6.h</p>
+<pre><code class="C">/*
+ * Allwinner H6 clock register definitions
+ *
+ * (C) Copyright 2017 Icenowy Zheng &lt;icenowy@aosc.io&gt;
+ *
+ * SPDX-License-Identifier: GPL-2.0+
+ */
+
+#ifndef _SUNXI_CLOCK_SUN50I_H6_H
+#define _SUNXI_CLOCK_SUN50I_H6_H
+
+struct sunxi_ccm_reg {
+    u32 pll1_cfg;       /* 0x000 pll1 (cpux) control */
+    u8 reserved_0x004[12];
+    u32 pll5_cfg;       /* 0x010 pll5 (ddr) control */
+    u8 reserved_0x014[12];
+    u32 pll6_cfg;       /* 0x020 pll6 (periph0) control */
+    u8 reserved_0x020[4];
+    u32 pll_periph1_cfg;    /* 0x028 pll periph1 control */
+    u8 reserved_0x028[4];
+    u32 pll7_cfg;       /* 0x030 pll7 (gpu) control */
+    u8 reserved_0x034[12];
+    u32 pll3_cfg;       /* 0x040 pll3 (video0) control */
+    u8 reserved_0x044[4];
+    u32 pll_video1_cfg; /* 0x048 pll video1 control */
+    u8 reserved_0x04c[12];
+    u32 pll4_cfg;       /* 0x058 pll4 (ve) control */
+    u8 reserved_0x05c[4];
+    u32 pll10_cfg;      /* 0x060 pll10 (de) control */
+    u8 reserved_0x064[12];
+    u32 pll9_cfg;       /* 0x070 pll9 (hsic) control */
+    u8 reserved_0x074[4];
+    u32 pll2_cfg;       /* 0x078 pll2 (audio) control */
+    u8 reserved_0x07c[148];
+    u32 pll5_pat;       /* 0x110 pll5 (ddr) pattern */
+    u8 reserved_0x114[20];
+    u32 pll_periph1_pat0;   /* 0x128 pll periph1 pattern0 */
+    u32 pll_periph1_pat1;   /* 0x12c pll periph1 pattern1 */
+    u32 pll7_pat0;      /* 0x130 pll7 (gpu) pattern0 */
+    u32 pll7_pat1;      /* 0x134 pll7 (gpu) pattern1 */
+    u8 reserved_0x138[8];
+    u32 pll3_pat0;      /* 0x140 pll3 (video0) pattern0 */
+    u32 pll3_pat1;      /* 0x144 pll3 (video0) pattern1 */
+    u32 pll_video1_pat0;    /* 0x148 pll video1 pattern0 */
+    u32 pll_video1_pat1;    /* 0x14c pll video1 pattern1 */
+    u8 reserved_0x150[8];
+    u32 pll4_pat0;      /* 0x158 pll4 (ve) pattern0 */
+    u32 pll4_pat1;      /* 0x15c pll4 (ve) pattern1 */
+    u32 pll10_pat0;     /* 0x160 pll10 (de) pattern0 */
+    u32 pll10_pat1;     /* 0x164 pll10 (de) pattern1 */
+    u8 reserved_0x168[8];
+    u32 pll9_pat0;      /* 0x170 pll9 (hsic) pattern0 */
+    u32 pll9_pat1;      /* 0x174 pll9 (hsic) pattern1 */
+    u32 pll2_pat0;      /* 0x178 pll2 (audio) pattern0 */
+    u32 pll2_pat1;      /* 0x17c pll2 (audio) pattern1 */
+    u8 reserved_0x180[384];
+    u32 pll1_bias;      /* 0x300 pll1 (cpux) bias */
+    u8 reserved_0x304[12];
+    u32 pll5_bias;      /* 0x310 pll5 (ddr) bias */
+    u8 reserved_0x314[12];
+    u32 pll6_bias;      /* 0x320 pll6 (periph0) bias */
+    u8 reserved_0x324[4];
+    u32 pll_periph1_bias;   /* 0x328 pll periph1 bias */
+    u8 reserved_0x32c[4];
+    u32 pll7_bias;      /* 0x330 pll7 (gpu) bias */
+    u8 reserved_0x334[12];
+    u32 pll3_bias;      /* 0x340 pll3 (video0) bias */
+    u8 reserved_0x344[4];
+    u32 pll_video1_bias;    /* 0x348 pll video1 bias */
+    u8 reserved_0x34c[12];
+    u32 pll4_bias;      /* 0x358 pll4 (ve) bias */
+    u8 reserved_0x35c[4];
+    u32 pll10_bias;     /* 0x360 pll10 (de) bias */
+    u8 reserved_0x364[12];
+    u32 pll9_bias;      /* 0x370 pll9 (hsic) bias */
+    u8 reserved_0x374[4];
+    u32 pll2_bias;      /* 0x378 pll2 (audio) bias */
+    u8 reserved_0x37c[132];
+    u32 pll1_tun;       /* 0x400 pll1 (cpux) tunning */
+    u8 reserved_0x404[252];
+    u32 cpu_axi_cfg;    /* 0x500 CPUX/AXI clock control*/
+    u8 reserved_0x504[12];
+    u32 psi_ahb1_ahb2_cfg;  /* 0x510 PSI/AHB1/AHB2 clock control */
+    u8 reserved_0x514[8];
+    u32 ahb3_cfg;       /* 0x51c AHB3 clock control */
+    u32 apb1_cfg;       /* 0x520 APB1 clock control */
+    u32 apb2_cfg;       /* 0x524 APB2 clock control */
+    u8 reserved_0x528[24];
+    u32 mbus_cfg;       /* 0x540 MBUS clock control */
+    u8 reserved_0x544[188];
+    u32 de_clk_cfg;     /* 0x600 DE clock control */
+    u8 reserved_0x604[8];
+    u32 de_gate_reset;  /* 0x60c DE gate/reset control */
+    u8 reserved_0x610[16];
+    u32 di_clk_cfg;     /* 0x620 DI clock control */
+    u8 reserved_0x024[8];
+    u32 di_gate_reset;  /* 0x62c DI gate/reset control */
+    u8 reserved_0x630[64];
+    u32 gpu_clk_cfg;    /* 0x670 GPU clock control */
+    u8 reserved_0x674[8];
+    u32 gpu_gate_reset; /* 0x67c GPU gate/reset control */
+    u32 ce_clk_cfg;     /* 0x680 CE clock control */
+    u8 reserved_0x684[8];
+    u32 ce_gate_reset;  /* 0x68c CE gate/reset control */
+    u32 ve_clk_cfg;     /* 0x690 VE clock control */
+    u8 reserved_0x694[8];
+    u32 ve_gate_reset;  /* 0x69c VE gate/reset control */
+    u8 reserved_0x6a0[16];
+    u32 emce_clk_cfg;   /* 0x6b0 EMCE clock control */
+    u8 reserved_0x6b4[8];
+    u32 emce_gate_reset;    /* 0x6bc EMCE gate/reset control */
+    u32 vp9_clk_cfg;    /* 0x6c0 VP9 clock control */
+    u8 reserved_0x6c4[8];
+    u32 vp9_gate_reset; /* 0x6cc VP9 gate/reset control */
+    u8 reserved_0x6d0[60];
+    u32 dma_gate_reset; /* 0x70c DMA gate/reset control */
+    u8 reserved_0x710[12];
+    u32 msgbox_gate_reset;  /* 0x71c Message Box gate/reset control */
+    u8 reserved_0x720[12];
+    u32 spinlock_gate_reset;/* 0x72c Spinlock gate/reset control */
+    u8 reserved_0x730[12];
+    u32 hstimer_gate_reset; /* 0x73c HS Timer gate/reset control */
+    u32 avs_gate_reset; /* 0x740 AVS gate/reset control */
+    u8 reserved_0x744[72];
+    u32 dbgsys_gate_reset;  /* 0x78c Debugging system gate/reset control */
+    u8 reserved_0x790[12];
+    u32 psi_gate_reset; /* 0x79c PSI gate/reset control */
+    u8 reserved_0x7a0[12];
+    u32 pwm_gate_reset; /* 0x7ac PWM gate/reset control */
+    u8 reserved_0x7b0[12];
+    u32 iommu_gate_reset;   /* 0x7bc IOMMU gate/reset control */
+    u8 reserved_0x7c0[64];
+    u32 dram_clk_cfg;       /* 0x800 DRAM clock control */
+    u32 mbus_gate;      /* 0x804 MBUS gate control */
+    u8 reserved_0x808[4];
+    u32 dram_gate_reset;    /* 0x80c DRAM gate/reset control */
+    u32 nand0_clk_cfg;  /* 0x810 NAND0 clock control */
+    u32 nand1_clk_cfg;  /* 0x814 NAND1 clock control */
+    u8 reserved_0x818[20];
+    u32 nand_gate_reset;    /* 0x82c NAND gate/reset control */
+    u32 sd0_clk_cfg;    /* 0x830 MMC0 clock control */
+    u32 sd1_clk_cfg;    /* 0x834 MMC1 clock control */
+    u32 sd2_clk_cfg;    /* 0x838 MMC2 clock control */
+    u8 reserved_0x83c[16];
+    u32 sd_gate_reset;  /* 0x84c MMC gate/reset control */
+    u8 reserved_0x850[188];
+    u32 uart_gate_reset;    /* 0x90c UART gate/reset control */
+    u8 reserved_0x910[12];
+    u32 twi_gate_reset; /* 0x91c I2C gate/reset control */
+    u8 reserved_0x920[28];
+    u32 scr_gate_reset; /* 0x93c SCR gate/reset control */
+    u32 spi0_clk_cfg;   /* 0x940 SPI0 clock control */
+    u32 spi1_clk_cfg;   /* 0x944 SPI1 clock control */
+    u8 reserved_0x948[36];
+    u32 spi_gate_reset; /* 0x96c SPI gate/reset control */
+    u8 reserved_0x970[12];
+    u32 emac_gate_reset;    /* 0x97c EMAC gate/reset control */
+    u8 reserved_0x980[48];
+    u32 ts_clk_cfg;     /* 0x9b0 TS clock control */
+    u8 reserved_0x9b4[8];
+    u32 ts_gate_reset;  /* 0x9bc TS gate/reset control */
+    u32 irtx_clk_cfg;   /* 0x9c0 IR TX clock control */
+    u8 reserved_0x9c4[8];
+    u32 irtx_gate_reset;    /* 0x9cc IR TX gate/reset control */
+    u8 reserved_0x9d0[44];
+    u32 ths_gate_reset; /* 0x9fc THS gate/reset control */
+    u8 reserved_0xa00[12];
+    u32 i2s3_clk_cfg;   /* 0xa0c I2S3 clock control */
+    u32 i2s0_clk_cfg;   /* 0xa10 I2S0 clock control */
+    u32 i2s1_clk_cfg;   /* 0xa14 I2S1 clock control */
+    u32 i2s2_clk_cfg;   /* 0xa18 I2S2 clock control */
+    u32 i2s_gate_reset; /* 0xa1c I2S gate/reset control */
+    u32 spdif_clk_cfg;  /* 0xa20 SPDIF clock control */
+    u8 reserved_0xa24[8];
+    u32 spdif_gate_reset;   /* 0xa2c SPDIF gate/reset control */
+    u8 reserved_0xa30[16];
+    u32 dmic_clk_cfg;   /* 0xa40 DMIC clock control */
+    u8 reserved_0xa44[8];
+    u32 dmic_gate_reset;    /* 0xa4c DMIC gate/reset control */
+    u8 reserved_0xa50[16];
+    u32 ahub_clk_cfg;   /* 0xa60 Audio HUB clock control */
+    u8 reserved_0xa64[8];
+    u32 ahub_gate_reset;    /* 0xa6c Audio HUB gate/reset control */
+    u32 usb0_clk_cfg;   /* 0xa70 USB0(OTG) clock control */
+    u32 usb1_clk_cfg;   /* 0xa74 USB1(XHCI) clock control */
+    u8 reserved_0xa78[4];
+    u32 usb3_clk_cfg;   /* 0xa78 USB3 clock control */
+    u8 reserved_0xa80[12];
+    u32 usb_gate_reset; /* 0xa8c USB gate/reset control */
+    u8 reserved_0xa90[32];
+    u32 pcie_ref_clk_cfg;   /* 0xab0 PCIE REF clock control */
+    u32 pcie_axi_clk_cfg;   /* 0xab4 PCIE AXI clock control */
+    u32 pcie_aux_clk_cfg;   /* 0xab8 PCIE AUX clock control */
+    u32 pcie_gate_reset;    /* 0xabc PCIE gate/reset control */
+    u8 reserved_0xac0[64];
+    u32 hdmi_clk_cfg;   /* 0xb00 HDMI clock control */
+    u32 hdmi_slow_clk_cfg;  /* 0xb04 HDMI slow clock control */
+    u8 reserved_0xb08[8];
+    u32 hdmi_cec_clk_cfg;   /* 0xb10 HDMI CEC clock control */
+    u8 reserved_0xb14[8];
+    u32 hdmi_gate_reset;    /* 0xb1c HDMI gate/reset control */
+    u8 reserved_0xb20[60];
+    u32 tcon_top_gate_reset;/* 0xb5c TCON TOP gate/reset control */
+    u32 tcon_lcd0_clk_cfg;  /* 0xb60 TCON LCD0 clock control */
+    u8 reserved_0xb64[24];
+    u32 tcon_lcd_gate_reset;/* 0xb7c TCON LCD gate/reset control */
+    u32 tcon_tv0_clk_cfg;   /* 0xb80 TCON TV0 clock control */
+    u8 reserved_0xb84[24];
+    u32 tcon_tv_gate_reset; /* 0xb9c TCON TV gate/reset control */
+    u8 reserved_0xba0[96];
+    u32 csi_misc_clk_cfg;   /* 0xc00 CSI MISC clock control */
+    u32 csi_top_clk_cfg;    /* 0xc04 CSI TOP clock control */
+    u32 csi_mclk_cfg;   /* 0xc08 CSI Master clock control */
+    u8 reserved_0xc0c[32];
+    u32 csi_gate_reset; /* 0xc2c CSI gate/reset control */
+    u8 reserved_0xc30[16];
+    u32 hdcp_clk_cfg;   /* 0xc40 HDCP clock control */
+    u8 reserved_0xc44[8];
+    u32 hdcp_gate_reset;    /* 0xc4c HDCP gate/reset control */
+    u8 reserved_0xc50[688];
+    u32 ccu_sec_switch; /* 0xf00 CCU security switch */
+    u32 pll_lock_dbg_ctrl;  /* 0xf04 PLL lock debugging control */
+};
+
+/* pll1 bit field */
+#define CCM_PLL1_CTRL_EN        BIT(31)
+#define CCM_PLL1_LOCK_EN        BIT(29)
+#define CCM_PLL1_LOCK           BIT(28)
+#define CCM_PLL1_CLOCK_TIME_2       (2 &lt;&lt; 24)
+#define CCM_PLL1_CTRL_P(p)      ((p) &lt;&lt; 16)
+#define CCM_PLL1_CTRL_N(n)      ((n) &lt;&lt; 8)
+
+/* pll3 bit field */
+#define CCM_PLL3_CTRL_M_SHIFT       1
+#define CCM_PLL3_CTRL_M_MASK        (0x1 &lt;&lt; CCM_PLL3_CTRL_M_SHIFT)
+#define CCM_PLL3_CTRL_M(n)      ((((n) - 1) &amp; 0x1) &lt;&lt; 1)
+#define CCM_PLL3_CTRL_N_SHIFT       8
+#define CCM_PLL3_CTRL_N_MASK        (0xff &lt;&lt; CCM_PLL3_CTRL_N_SHIFT)
+#define CCM_PLL3_CTRL_N(n)      ((((n) - 1) &amp; 0xff) &lt;&lt; 8)
+#define CCM_PLL3_CTRL_LOCK_EN       (0x1 &lt;&lt; 29)
+#define CCM_PLL3_CTRL_LOCK      (0x1 &lt;&lt; 28)
+#define CCM_PLL3_CTRL_EN        (0x1 &lt;&lt; 31)
+
+/* pll5 bit field */
+#define CCM_PLL5_CTRL_EN        BIT(31)
+#define CCM_PLL5_LOCK_EN        BIT(29)
+#define CCM_PLL5_LOCK           BIT(28)
+#define CCM_PLL5_CTRL_N(n)      ((n) &lt;&lt; 8)
+#define CCM_PLL5_CTRL_DIV1(div1)    ((div1) &lt;&lt; 0)
+#define CCM_PLL5_CTRL_DIV2(div0)    ((div0) &lt;&lt; 1)
+
+/* pll6 bit field */
+#define CCM_PLL6_CTRL_EN        BIT(31)
+#define CCM_PLL6_LOCK_EN        BIT(29)
+#define CCM_PLL6_LOCK           BIT(28)
+#define CCM_PLL6_CTRL_N_SHIFT       8
+#define CCM_PLL6_CTRL_N_MASK        (0xff &lt;&lt; CCM_PLL6_CTRL_N_SHIFT)
+#define CCM_PLL6_CTRL_DIV1_SHIFT    0
+#define CCM_PLL6_CTRL_DIV1_MASK     (0x1 &lt;&lt; CCM_PLL6_CTRL_DIV1_SHIFT)
+#define CCM_PLL6_CTRL_DIV2_SHIFT    1
+#define CCM_PLL6_CTRL_DIV2_MASK     (0x1 &lt;&lt; CCM_PLL6_CTRL_DIV2_SHIFT)
+#define CCM_PLL6_DEFAULT        0xa0006300
+
+/* pll10 bit field */
+#define CCM_PLL10_CTRL_EN       BIT(31)
+#define CCM_PLL10_LOCK_EN       BIT(29)
+#define CCM_PLL10_LOCK          BIT(28)
+#define CCM_PLL10_CTRL_N_SHIFT      8
+#define CCM_PLL10_CTRL_N_MASK       (0xff &lt;&lt; CCM_PLL10_CTRL_N_SHIFT)
+#define CCM_PLL10_CTRL_DIV1_SHIFT   0
+#define CCM_PLL10_CTRL_DIV1_MASK    (0x1 &lt;&lt; CCM_PLL10_CTRL_DIV1_SHIFT)
+#define CCM_PLL10_CTRL_DIV2_SHIFT   1
+#define CCM_PLL10_CTRL_DIV2_MASK    (0x1 &lt;&lt; CCM_PLL10_CTRL_DIV2_SHIFT)
+#define CCM_PLL10_DEFAULT       0xa0002301 /* 432MHz */
+
+/* cpu_axi bit field*/
+#define CCM_CPU_AXI_MUX_MASK        (0x3 &lt;&lt; 24)
+#define CCM_CPU_AXI_MUX_OSC24M      (0x0 &lt;&lt; 24)
+#define CCM_CPU_AXI_MUX_PLL_CPUX    (0x3 &lt;&lt; 24)
+#define CCM_CPU_AXI_APB_MASK        0x300
+#define CCM_CPU_AXI_AXI_MASK        0x3
+#define CCM_CPU_AXI_DEFAULT_FACTORS 0x301
+
+/* psi_ahb1_ahb2 bit field */
+#define CCM_PSI_AHB1_AHB2_DEFAULT   0x03000102
+
+/* ahb3 bit field */
+#define CCM_AHB3_DEFAULT        0x03000002
+
+/* apb1 bit field */
+#define CCM_APB1_DEFAULT        0x03000102
+
+/* apb2 bit field */
+#define APB2_CLK_SRC_OSC24M     (0x0 &lt;&lt; 24)
+#define APB2_CLK_SRC_OSC32K     (0x1 &lt;&lt; 24)
+#define APB2_CLK_SRC_PSI        (0x2 &lt;&lt; 24)
+#define APB2_CLK_SRC_PLL6       (0x3 &lt;&lt; 24)
+#define APB2_CLK_SRC_MASK       (0x3 &lt;&lt; 24)
+#define APB2_CLK_RATE_N_1       (0x0 &lt;&lt; 8)
+#define APB2_CLK_RATE_N_2       (0x1 &lt;&lt; 8)
+#define APB2_CLK_RATE_N_4       (0x2 &lt;&lt; 8)
+#define APB2_CLK_RATE_N_8       (0x3 &lt;&lt; 8)
+#define APB2_CLK_RATE_N_MASK        (3 &lt;&lt; 8)
+#define APB2_CLK_RATE_M(m)      (((m)-1) &lt;&lt; 0)
+#define APB2_CLK_RATE_M_MASK            (3 &lt;&lt; 0)
+
+/* MBUS clock bit field */
+#define MBUS_ENABLE         BIT(31)
+#define MBUS_RESET          BIT(30)
+#define MBUS_CLK_SRC_MASK       GENMASK(25, 24)
+#define MBUS_CLK_SRC_OSCM24     (0 &lt;&lt; 24)
+#define MBUS_CLK_SRC_PLL6X2     (1 &lt;&lt; 24)
+#define MBUS_CLK_SRC_PLL5       (2 &lt;&lt; 24)
+#define MBUS_CLK_SRC_PLL6X4     (3 &lt;&lt; 24)
+#define MBUS_CLK_M(m)           (((m)-1) &lt;&lt; 0)
+
+/* Module gate/reset shift*/
+#define RESET_SHIFT         (16)
+
+/* DE clock bit field */
+#define CCM_DE_CTRL_ENABLE      BIT(31)
+#define CCM_DE_CTRL_PLL10       (0x0 &lt;&lt; 24)
+#define CCM_DE_CTRL_PLL6X2      (0x1 &lt;&lt; 24)
+#define CCM_DE_CTRL_M(x)        ((x) - 1)
+
+/* DRAM clock bit field */
+#define DRAM_MOD_RESET          BIT(30)
+#define DRAM_CLK_UPDATE         BIT(27)
+#define DRAM_CLK_SRC_MASK       GENMASK(25, 24)
+#define DRAM_CLK_SRC_PLL5       (0 &lt;&lt; 24)
+#define DRAM_CLK_M(m)           (((m)-1) &lt;&lt; 0)
+
+/* MMC clock bit field */
+#define CCM_MMC_CTRL_M(x)       ((x) - 1)
+#define CCM_MMC_CTRL_N(x)       ((x) &lt;&lt; 8)
+#define CCM_MMC_CTRL_OSCM24     (0x0 &lt;&lt; 24)
+#define CCM_MMC_CTRL_PLL6X2     (0x1 &lt;&lt; 24)
+#define CCM_MMC_CTRL_PLL_PERIPH2X2  (0x2 &lt;&lt; 24)
+#define CCM_MMC_CTRL_ENABLE     (0x1 &lt;&lt; 31)
+/* H6 doesn't have these delays */
+#define CCM_MMC_CTRL_OCLK_DLY(a)    ((void) (a), 0)
+#define CCM_MMC_CTRL_SCLK_DLY(a)    ((void) (a), 0)
+
+#define CCM_HDMI_CTRL_M(n)      ((((n) - 1) &amp; 0xf) &lt;&lt; 0)
+#define CCM_HDMI_CTRL_PLL_MASK      (3 &lt;&lt; 24)
+#define CCM_HDMI_CTRL_PLL3      (0 &lt;&lt; 24)
+#define CCM_HDMI_CTRL_PLL_VIDEO1    (1 &lt;&lt; 24)
+#define CCM_HDMI_CTRL_PLL_VIDEO1_4X (2 &lt;&lt; 24)
+#define CCM_HDMI_CTRL_GATE      (0x1 &lt;&lt; 31)
+
+#define CCM_HDMI_SLOW_CTRL_GATE     (0x1 &lt;&lt; 31)
+
+#define CCM_HDMI_BUS_CTRL_GATE      (0x1 &lt;&lt; 0)
+#define CCM_HDMI_BUS_CTRL_RST0      (0x1 &lt;&lt; 16)
+#define CCM_HDMI_BUS_CTRL_RST1      (0x1 &lt;&lt; 17)
+
+#define CCM_LCD_TOP_CTRL_RST        (0x1 &lt;&lt; 16)
+#define CCM_LCD_TOP_CTRL_GATE       (0x1 &lt;&lt; 0)
+
+#define CCM_LCD0_CTRL_GATE      (0x1 &lt;&lt; 31)
+#define CCM_LCD0_CTRL_PLL_MASK      (0x7 &lt;&lt; 24)
+#define CCM_LCD0_CTRL_PLL_VIDEO0    (0x0 &lt;&lt; 24)
+#define CCM_LCD0_CTRL_PLL_VIDEO0_4X (0x1 &lt;&lt; 24)
+#define CCM_LCD0_CTRL_PLL_VIDEO1    (0x2 &lt;&lt; 24)
+#define CCM_LCD0_CTRL_PLL_VIDEO1_4X (0x3 &lt;&lt; 24)
+#define CCM_LCD0_CTRL_M(n)      ((((n) - 1) &amp; 0xf) &lt;&lt; 0)
+
+#define CCM_TCON_TV_BGR_CTRL_RST    (0x1 &lt;&lt; 16)
+#define CCM_TCON_TV_BGR_CTRL_GATE   (0x1 &lt;&lt; 0)
+
+#ifndef __ASSEMBLY__
+void clock_set_pll1(unsigned int hz);
+void clock_set_pll3(unsigned int clk);
+void clock_set_pll3_factors(int m, int n);
+unsigned int clock_get_pll3(void);
+unsigned int clock_get_pll6(void);
+#endif
+
+#endif /* _SUNXI_CLOCK_SUN50I_H6_H */
+</code></pre>
+</body>
+
+</html>

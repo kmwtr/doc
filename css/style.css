@@ -1,0 +1,183 @@
+*{margin:0; padding:0; font-size:100%; font-weight:normal; vertical-align:baseline; background:transparent; border:none;}
+
+/* --------------- */
+
+body{
+	background: White;
+	color: Black;
+	text-align: left;
+	font-family: 'Source Code Pro', 'Yu Gothic Medium', "Hiragino Sans", monospace;
+	line-height: 1.6em;
+
+	margin: auto;
+	width: 900px;
+	padding: 0 20px;
+}
+
+/* --------------- */
+
+h1, h2, h3, p, ul, li, a{
+	font-weight: normal;
+}
+
+h1, h2, h3, h4{
+	font-weight: bold;
+	line-height: 2.0em;
+	margin: 1.5em 0;
+}
+
+h1{
+	font-size: 180%;
+	border-bottom: 2px solid black;
+}
+
+h2{
+	font-size: 140%;
+	border-bottom: 1px solid black;
+}
+
+h3, h4{
+	font-size: 100%;
+	border-bottom: 1px dashed gray;
+}
+
+p, pre, ul{
+	font-size: 100%;
+	margin: 1.0em 0;
+}
+
+li ul {
+	padding: 0;
+	margin: 0 0 0 1.0em;
+}
+ul, ol {
+	padding: 0 2.0em;
+}
+
+code{
+	display: block;
+	font-family: 'Source Code Pro', monospace;
+	font-size: 80%;
+	background: #e4eddf;
+	margin: 0.5em 0;
+	padding: 1.0em;
+	line-height: 1.2em;
+	border-radius: 6px;
+	
+}
+
+li code, p code{
+	display: inline;
+	margin: 0;
+	font-size: 100%;
+	padding: 0 0.5em;
+	line-height: 1.6em;
+}
+
+.bash {
+	background: #4c5966;
+	color: white;
+}
+
+table{
+    border-collapse: collapse;
+	border: 1px solid gray;
+	margin: 1.0em 0;
+	width: 100%;
+}
+th{
+	font-weight: bold;
+    padding: 0.1em 1.0em;
+    border: 1px solid gray;
+	background: #b8cfe5;
+}
+
+td{
+    padding: 0.1em 1.0em;
+    border: 1px dashed gray;
+	background: #ececec;
+}
+
+table tr:nth-child(odd) td {
+	background: white;
+}
+
+hr{
+	height: 1px;
+	border: none;
+	border-top: 1px gray dashed;
+}
+
+img{
+	margin: 0.5em 0;
+}
+
+blockquote{
+	position: relative;
+    padding: 0.1em 1.0em;
+	margin: 0.5em 0;
+    font-style: italic;
+    background: #ececec;
+    border-left: 0.5em solid #b8cfe5;
+	border-radius: 6px;
+}
+
+/* --------------- */
+
+article{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin-bottom: 1em;
+}
+
+article::before{
+  content:"";
+  display: block;
+  width:240px;
+  order:1;
+}
+
+article::after{
+  content:"";
+  display: block;
+  width:240px;
+}
+
+section{
+	margin-bottom: 0.5em;
+}
+
+/* --------------- */
+
+a:link {
+    color: steelblue;
+}
+a:visited {
+    color: slategray;
+}
+a:hover {
+    color: lightseagreen;
+}
+
+/* --------------- */
+
+.small {
+	font-size: 75%;
+}
+
+#toc{
+	background-color: #e4edf2;
+	padding: 1.0em 2.0em;
+	border-radius: 6px;
+}
+
+#toc h3{
+	color: gray;
+	border-bottom: 1px dashed gray;
+	margin: 0 0 1.0em 0;
+}
+
+#toc ul{
+	padding: 0 1.0em;
+}
