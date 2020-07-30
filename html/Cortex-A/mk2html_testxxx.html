@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="../../css/style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	    <div id="header_wrapper">
+        <header>
+            <h1><a href="../../index.html">doc</a>.kmwtr.xyz</h1>
+        </header>
+    </div>
+
+<article>
+<h1 id="build-aarch32-to-aarch64-bootable-binary">Build AArch32 to AArch64 Bootable Binary 手動合体</h1>
+<div id="toc">
+<h3>Table of Contents</h3>
+<div class="toc">
+<ul>
+<li><a href="#build-aarch32-to-aarch64-bootable-binary">Build AArch32 to AArch64 Bootable Binary 手動合体</a><ul>
+<li><a href="#allwinner-64-bit">Allwinner の 64-bit バイナリの実行について</a></li>
+<li><a href="#aarch32">AArch32</a></li>
+<li><a href="#aarch64">AArch64</a></li>
+<li><a href="#64bit_led_blink">64bit_LED_Blink</a><ul>
+<li><a href="#_1">手動合体</a></li>
+</ul>
+</li>
+<li><a href="#sd">SDカードに流し込む</a></li>
+<li><a href="#_2">残る課題</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+</div>
+<h2 id="allwinner-64-bit">Allwinner の 64-bit バイナリの実行について</h2>
+<p>Allwinnerの新しめのSoC(Cortex-A53)は32bitと64bitの両方に対応している。これらSoCはリセット後BROMから32bitモードで起動する。</p>
+<p>U-Boot SPL内には早い段階で64bitに遷移するためのコードが含まれている。これについて詳しくは以下。</p>
+<h2 id="aarch32">AArch32</h2>
+<pre><code>startup.elf:     file format elf32-littlearm
+
+
+Disassembly of section .start:
+
+00020060 &lt;_start&gt;:
+   20060:   eaff8007    b   84 &lt;*ABS*0x84&gt;    // （仮）in AArch64: tst x0, x0
+   20064:   ea000025    b   20100 &lt;init&gt;      // （仮）初期化コードへ飛べ
+    ...
+   200e4:   e59f1024    ldr r1, [pc, #36]   ; 20110 &lt;init+0x10&gt;
+   200e8:   e59f0024    ldr r0, [pc, #36]   ; 20114 &lt;init+0x14&gt;
+   200ec:   e5810000    str r0, [r1]
+   200f0:   f57ff04f    dsb sy
+   200f4:   f57ff06f    isb sy
+   200f8:   ee1c0f50    mrc 15, 0, r0, cr12, cr0, {2}
+   200fc:   e3800003    orr r0, r0, #3
+   20100:   ee0c0f50    mcr 15, 0, r0, cr12, cr0, {2}
+   20104:   f57ff06f    isb sy
+   20108:   e320f003    wfi
+   2010c:   eafffffe    b   2010c &lt;init+0xc&gt;
+   20110:   09010040    stmdbeq r1, {r6}
+   20114:   00020060    andeq   r0, r2, r0, rrx
+
+Disassembly of section .text:
+
+00020100 &lt;init&gt;:                        // （仮）初期化コード
+   20100:   eafffffe    b   20100 &lt;init&gt;
+</code></pre>
+
+<p>↑このリストから得た値を直接AArch64のコードに記入する。</p>
+<p>startup.bin (elfから自分で作ったもの)</p>
+<pre><code class="hexdump">0780 ffea 2500 00ea 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 2410 9fe5 2400 9fe5 0000 81e5
+4ff0 7ff5 6ff0 7ff5 500f 1cee 0300 80e3
+500f 0cee 6ff0 7ff5 03f0 20e3 feff ffea
+4000 0109 6000 0200 0000 0000 0000 0000
+</code></pre>
+
+<h2 id="aarch64">AArch64</h2>
+<p>mksunxibootで頭にオフセット0x60が入る事を考慮しなければいけない。</p>
+<pre><code>startup.elf:     file format elf64-littleaarch64
+
+
+Disassembly of section .start:
+
+0000000000020060 &lt;_start&gt;:
+   20060:   ea00001f    tst x0, x0
+   20064:   14000067    b   20200 &lt;init&gt;
+   20068:   aaaaaaaa    .word   0xaaaaaaaa
+   2006c:   aaaaaaaa    .word   0xaaaaaaaa
+   20070:   aaaaaaaa    .word   0xaaaaaaaa
+   20074:   aaaaaaaa    .word   0xaaaaaaaa
+   20078:   aaaaaaaa    .word   0xaaaaaaaa
+   2007c:   aaaaaaaa    .word   0xaaaaaaaa
+   20080:   aaaaaaaa    .word   0xaaaaaaaa
+   20084:   aaaaaaaa    .word   0xaaaaaaaa
+   20088:   aaaaaaaa    .word   0xaaaaaaaa
+   2008c:   aaaaaaaa    .word   0xaaaaaaaa
+   20090:   aaaaaaaa    .word   0xaaaaaaaa
+   20094:   aaaaaaaa    .word   0xaaaaaaaa
+   20098:   aaaaaaaa    .word   0xaaaaaaaa
+   2009c:   aaaaaaaa    .word   0xaaaaaaaa
+   200a0:   aaaaaaaa    .word   0xaaaaaaaa
+   200a4:   aaaaaaaa    .word   0xaaaaaaaa
+   200a8:   aaaaaaaa    .word   0xaaaaaaaa
+   200ac:   aaaaaaaa    .word   0xaaaaaaaa
+   200b0:   aaaaaaaa    .word   0xaaaaaaaa
+   200b4:   aaaaaaaa    .word   0xaaaaaaaa
+   200b8:   aaaaaaaa    .word   0xaaaaaaaa
+   200bc:   aaaaaaaa    .word   0xaaaaaaaa
+   200c0:   aaaaaaaa    .word   0xaaaaaaaa
+   200c4:   aaaaaaaa    .word   0xaaaaaaaa
+   200c8:   aaaaaaaa    .word   0xaaaaaaaa
+   200cc:   aaaaaaaa    .word   0xaaaaaaaa
+   200d0:   aaaaaaaa    .word   0xaaaaaaaa
+   200d4:   aaaaaaaa    .word   0xaaaaaaaa
+   200d8:   aaaaaaaa    .word   0xaaaaaaaa
+   200dc:   aaaaaaaa    .word   0xaaaaaaaa
+   200e0:   aaaaaaaa    .word   0xaaaaaaaa
+   200e4:   e59f1024    .word   0xe59f1024
+   200e8:   e59f0024    .word   0xe59f0024
+   200ec:   e5810000    .word   0xe5810000
+   200f0:   f57ff04f    .word   0xf57ff04f
+   200f4:   f57ff06f    .word   0xf57ff06f
+   200f8:   ee1c0f50    .word   0xee1c0f50
+   200fc:   e3800003    .word   0xe3800003
+   20100:   ee0c0f50    .word   0xee0c0f50
+   20104:   f57ff06f    .word   0xf57ff06f
+   20108:   e320f003    .word   0xe320f003
+   2010c:   eafffffd    .word   0xeafffffd
+   20110:   09010040    .word   0x09010040
+   20114:   00020060    .word   0x00020060
+
+Disassembly of section .text:
+
+0000000000020200 &lt;init&gt;:
+   20200:   58000080    ldr x0, 20210 &lt;stacktop&gt;
+   20204:   9100001f    mov sp, x0
+   20208:   910003e0    mov x0, sp
+   2020c:   14000000    b   2020c &lt;init+0xc&gt;
+
+Disassembly of section .rodata:
+
+0000000000020210 &lt;stacktop&gt;:
+   20210:   00026000    .inst   0x00026000 ; undefined
+   20214:   00000000    .inst   0x00000000 ; undefined
+</code></pre>
+
+<p>startup.bin (objcopyで作られたもの。不要。)</p>
+<pre><code class="hexdump">8000 0058 1f00 0091 e003 0091 0000 0014
+0060 0200 0000 0000 
+</code></pre>
+
+<p>startup.bin前半 (elfから自分で作ったもの。)</p>
+<pre><code class="hexdump">1f00 00ea 6700 0014 aaaa aaaa aaaa aaaa
+aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa
+aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa
+aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa
+aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa
+aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa
+aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa
+aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa
+aaaa aaaa 2410 9fe5 2400 9fe5 0000 81e5
+4ff0 7ff5 6ff0 7ff5 500f 1cee 0300 80e3
+500f 0cee 6ff0 7ff5 03f0 20e3 fdff ffea
+4000 0109 6000 0200 0000 0000 0000 0000
+</code></pre>
+
+<p>ここでHEXをアセンブリに変換して確認できる。
+http://armconverter.com/hextoarm/</p>
+<p><code>1f0000ea</code> at <code>0x20000</code> は…</p>
+<ul>
+<li>AArch32 なら <code>0x20000:  B   #0x20084</code></li>
+<li>AArch64 なら <code>0x20000:  TST X0, X0</code></li>
+</ul>
+<p>これでAArch32状態からAArch64状態へ遷移するはず。</p>
+<h2 id="64bit_led_blink">64bit_LED_Blink</h2>
+<p>手軽に確認するため、64bit Lチカのコードを作った。</p>
+<pre><code>main.elf:     file format elf64-littleaarch64
+
+
+Disassembly of section .start:
+
+0000000000020060 &lt;_start&gt;:
+   20060:   ea00001f    tst x0, x0
+   20064:   14000067    b   20200 &lt;init&gt;
+   20068:   aaaaaaaa    .word   0xaaaaaaaa
+   2006c:   aaaaaaaa    .word   0xaaaaaaaa
+   20070:   aaaaaaaa    .word   0xaaaaaaaa
+   20074:   aaaaaaaa    .word   0xaaaaaaaa
+   20078:   aaaaaaaa    .word   0xaaaaaaaa
+   2007c:   aaaaaaaa    .word   0xaaaaaaaa
+   20080:   aaaaaaaa    .word   0xaaaaaaaa
+   20084:   aaaaaaaa    .word   0xaaaaaaaa
+   20088:   aaaaaaaa    .word   0xaaaaaaaa
+   2008c:   aaaaaaaa    .word   0xaaaaaaaa
+   20090:   aaaaaaaa    .word   0xaaaaaaaa
+   20094:   aaaaaaaa    .word   0xaaaaaaaa
+   20098:   aaaaaaaa    .word   0xaaaaaaaa
+   2009c:   aaaaaaaa    .word   0xaaaaaaaa
+   200a0:   aaaaaaaa    .word   0xaaaaaaaa
+   200a4:   aaaaaaaa    .word   0xaaaaaaaa
+   200a8:   aaaaaaaa    .word   0xaaaaaaaa
+   200ac:   aaaaaaaa    .word   0xaaaaaaaa
+   200b0:   aaaaaaaa    .word   0xaaaaaaaa
+   200b4:   aaaaaaaa    .word   0xaaaaaaaa
+   200b8:   aaaaaaaa    .word   0xaaaaaaaa
+   200bc:   aaaaaaaa    .word   0xaaaaaaaa
+   200c0:   aaaaaaaa    .word   0xaaaaaaaa
+   200c4:   aaaaaaaa    .word   0xaaaaaaaa
+   200c8:   aaaaaaaa    .word   0xaaaaaaaa
+   200cc:   aaaaaaaa    .word   0xaaaaaaaa
+   200d0:   aaaaaaaa    .word   0xaaaaaaaa
+   200d4:   aaaaaaaa    .word   0xaaaaaaaa
+   200d8:   aaaaaaaa    .word   0xaaaaaaaa
+   200dc:   aaaaaaaa    .word   0xaaaaaaaa
+   200e0:   aaaaaaaa    .word   0xaaaaaaaa
+   200e4:   e59f1024    .word   0xe59f1024
+   200e8:   e59f0024    .word   0xe59f0024
+   200ec:   e5810000    .word   0xe5810000
+   200f0:   f57ff04f    .word   0xf57ff04f
+   200f4:   f57ff06f    .word   0xf57ff06f
+   200f8:   ee1c0f50    .word   0xee1c0f50
+   200fc:   e3800003    .word   0xe3800003
+   20100:   ee0c0f50    .word   0xee0c0f50
+   20104:   f57ff06f    .word   0xf57ff06f
+   20108:   e320f003    .word   0xe320f003
+   2010c:   eafffffd    .word   0xeafffffd
+   20110:   09010040    .word   0x09010040
+   20114:   00020060    .word   0x00020060
+
+Disassembly of section .text:
+
+0000000000020200 &lt;init&gt;:
+   20200:   58000080    ldr x0, 20210 &lt;stacktop&gt;
+   20204:   9100001f    mov sp, x0
+   20208:   910003e0    mov x0, sp
+   2020c:   94000011    bl  20250 &lt;main&gt;
+
+0000000000020210 &lt;stacktop&gt;:
+   20210:   00026000    .word   0x00026000
+    ...
+
+0000000000020220 &lt;setResisterBit&gt;:
+   20220:   52800404    mov w4, #0x20                   // #32
+   20224:   4b020082    sub w2, w4, w2
+   20228:   12800004    mov w4, #0xffffffff             // #-1
+   2022c:   b9400005    ldr w5, [x0]
+   20230:   1ac22484    lsr w4, w4, w2
+   20234:   2a2403e4    mvn w4, w4
+   20238:   1ac12063    lsl w3, w3, w1
+   2023c:   1ac12084    lsl w4, w4, w1
+   20240:   0a050084    and w4, w4, w5
+   20244:   2a040064    orr w4, w3, w4
+   20248:   b9000004    str w4, [x0]
+   2024c:   d65f03c0    ret
+
+Disassembly of section .main:
+
+0000000000020250 &lt;main&gt;:
+   20250:   a9be7bfd    stp x29, x30, [sp, #-32]!
+   20254:   52800023    mov w3, #0x1                    // #1
+   20258:   52800062    mov w2, #0x3                    // #3
+   2025c:   52800181    mov w1, #0xc                    // #12
+   20260:   910003fd    mov x29, sp
+   20264:   d2840000    mov x0, #0x2000                 // #8192
+   20268:   f2a0e040    movk    x0, #0x702, lsl #16
+   2026c:   97ffffed    bl  20220 &lt;setResisterBit&gt;
+   20270:   5290d3e1    mov w1, #0x869f                 // #34463
+   20274:   72a00021    movk    w1, #0x1, lsl #16
+   20278:   d2840202    mov x2, #0x2010                 // #8208
+   2027c:   f2a0e042    movk    x2, #0x702, lsl #16
+   20280:   52800103    mov w3, #0x8                    // #8
+   20284:   d503201f    nop
+   20288:   b9001fbf    str wzr, [x29, #28]
+   2028c:   b9401fa0    ldr w0, [x29, #28]
+   20290:   6b01001f    cmp w0, w1
+   20294:   540000e8    b.hi    202b0 &lt;main+0x60&gt;  // b.pmore
+   20298:   b9401fa0    ldr w0, [x29, #28]
+   2029c:   11000400    add w0, w0, #0x1
+   202a0:   b9001fa0    str w0, [x29, #28]
+   202a4:   b9401fa0    ldr w0, [x29, #28]
+   202a8:   6b01001f    cmp w0, w1
+   202ac:   54ffff69    b.ls    20298 &lt;main+0x48&gt;  // b.plast
+   202b0:   b9000043    str w3, [x2]
+   202b4:   b9001fbf    str wzr, [x29, #28]
+   202b8:   b9401fa0    ldr w0, [x29, #28]
+   202bc:   6b01001f    cmp w0, w1
+   202c0:   54000108    b.hi    202e0 &lt;main+0x90&gt;  // b.pmore
+   202c4:   d503201f    nop
+   202c8:   b9401fa0    ldr w0, [x29, #28]
+   202cc:   11000400    add w0, w0, #0x1
+   202d0:   b9001fa0    str w0, [x29, #28]
+   202d4:   b9401fa0    ldr w0, [x29, #28]
+   202d8:   6b01001f    cmp w0, w1
+   202dc:   54ffff69    b.ls    202c8 &lt;main+0x78&gt;  // b.plast
+   202e0:   b900005f    str wzr, [x2]
+   202e4:   17ffffe9    b   20288 &lt;main+0x38&gt;
+</code></pre>
+
+<p>main.bin（init から C言語の部分のみ書き出されてる）</p>
+<pre><code class="hexdump">8000 0058 1f00 0091 e003 0091 1100 0094
+0060 0200 0000 0000 0000 0000 0000 0000
+0404 8052 8200 024b 0400 8012 0500 40b9
+8424 c21a e403 242a 6320 c11a 8420 c11a
+8400 050a 6400 042a 0400 00b9 c003 5fd6
+fd7b bea9 2300 8052 6200 8052 8101 8052
+fd03 0091 0000 84d2 40e0 a0f2 edff ff97
+e1d3 9052 2100 a072 0202 84d2 42e0 a0f2
+0301 8052 1f20 03d5 bf1f 00b9 a01f 40b9
+1f00 016b e800 0054 a01f 40b9 0004 0011
+a01f 00b9 a01f 40b9 1f00 016b 69ff ff54
+4300 00b9 bf1f 00b9 a01f 40b9 1f00 016b
+0801 0054 1f20 03d5 a01f 40b9 0004 0011
+a01f 00b9 a01f 40b9 1f00 016b 69ff ff54
+5f00 00b9 e9ff ff17 
+</code></pre>
+
+<h3 id="_1">手動合体</h3>
+<p>_start 部分が含まれる startup.bin (AArch64テストの過程でelfから自分で作ったもの)  と LED_Blink の main.bin を手作業でくっつける（遠い目）</p>
+<ul>
+<li>startup.bin を <code>0x60</code> 地点に</li>
+<li>main.bin を <code>0x200</code> 地点に</li>
+</ul>
+<p>出来上がったものがこちら</p>
+<p>startup_bootable.bin</p>
+<pre><code class="hexdump">0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+1f00 00ea 6700 0014 aaaa aaaa aaaa aaaa
+aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa
+aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa
+aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa
+aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa
+aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa
+aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa
+aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa
+aaaa aaaa 2410 9fe5 2400 9fe5 0000 81e5
+4ff0 7ff5 6ff0 7ff5 500f 1cee 0300 80e3
+500f 0cee 6ff0 7ff5 03f0 20e3 fdff ffea
+4000 0109 6000 0200 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+8000 0058 1f00 0091 e003 0091 1100 0094
+0060 0200 0000 0000 0000 0000 0000 0000
+0404 8052 8200 024b 0400 8012 0500 40b9
+8424 c21a e403 242a 6320 c11a 8420 c11a
+8400 050a 6400 042a 0400 00b9 c003 5fd6
+fd7b bea9 2300 8052 6200 8052 8101 8052
+fd03 0091 0000 84d2 40e0 a0f2 edff ff97
+e1d3 9052 2100 a072 0202 84d2 42e0 a0f2
+0301 8052 1f20 03d5 bf1f 00b9 a01f 40b9
+1f00 016b e800 0054 a01f 40b9 0004 0011
+a01f 00b9 a01f 40b9 1f00 016b 69ff ff54
+4300 00b9 bf1f 00b9 a01f 40b9 1f00 016b
+0801 0054 1f20 03d5 a01f 40b9 0004 0011
+a01f 00b9 a01f 40b9 1f00 016b 69ff ff54
+5f00 00b9 e9ff ff17 0000 0000 0000 0000
+</code></pre>
+
+<p>頭の0x60までを消した上で sunxiboot で改めて埋め直す。</p>
+<pre><code>$ mksunxiboot ./startup_bootable.bin startup_bootable.sunxiboot
+</code></pre>
+
+<p>出来上がったものがこちら</p>
+<p>startup_bootable.sunxiboot</p>
+<pre><code class="hexdump">1600 00ea 6547 4f4e 2e42 5430 1e79 894b
+0020 0000 5350 4c02 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+1f00 00ea 6700 0014 aaaa aaaa aaaa aaaa
+aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa
+aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa
+aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa
+aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa
+aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa
+aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa
+aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa
+aaaa aaaa 2410 9fe5 2400 9fe5 0000 81e5
+4ff0 7ff5 6ff0 7ff5 500f 1cee 0300 80e3
+500f 0cee 6ff0 7ff5 03f0 20e3 fdff ffea
+4000 0109 6000 0200 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+8000 0058 1f00 0091 e003 0091 1100 0094
+0060 0200 0000 0000 0000 0000 0000 0000
+0404 8052 8200 024b 0400 8012 0500 40b9
+8424 c21a e403 242a 6320 c11a 8420 c11a
+8400 050a 6400 042a 0400 00b9 c003 5fd6
+fd7b bea9 2300 8052 6200 8052 8101 8052
+fd03 0091 0000 84d2 40e0 a0f2 edff ff97
+e1d3 9052 2100 a072 0202 84d2 42e0 a0f2
+0301 8052 1f20 03d5 bf1f 00b9 a01f 40b9
+1f00 016b e800 0054 a01f 40b9 0004 0011
+a01f 00b9 a01f 40b9 1f00 016b 69ff ff54
+4300 00b9 bf1f 00b9 a01f 40b9 1f00 016b
+0801 0054 1f20 03d5 a01f 40b9 0004 0011
+a01f 00b9 a01f 40b9 1f00 016b 69ff ff54
+5f00 00b9 e9ff ff17 0000 0000 0000 0000
+</code></pre>
+
+<p>以下すべて0x00のため省略</p>
+<p>これでブータブルな64bit Lチカイメージができた。</p>
+<h2 id="sd">SDカードに流し込む</h2>
+<pre><code class="bash">$ sudo dd if=./startup_bootable.sunxiboot of=/dev/sdb bs=1024 seek=8
+</code></pre>
+
+<p>電源を入れると動く。</p>
+<p><img alt="IMG_0535_12fps_320x180.gif" src="b2S_eLY5A-IMG_0535_12fps_320x180.gif"></p>
+<h2 id="_2">残る課題</h2>
+<p>まずは順当に以下の処理をクリアしていきたい。</p>
+<ol>
+<li>エラッタ対応（多分U-BootSPLでもスルーしてる気がする）</li>
+<li>レジスタの初期化（ARMのブート向けドキュメント準拠）</li>
+<li>クロック（多分デフォルトだと超遅い）</li>
+<li>UART通信</li>
+</ol>
+<p>その後、とりあえずGPIO制御でLCDもチカチカさせたい。（SRAMでFBは容量的に不可か。）</p>
+<p>DRAMの初期化すら程遠いが頑張ってやっていきましょう。</p>
+</body>
+
+</html>
