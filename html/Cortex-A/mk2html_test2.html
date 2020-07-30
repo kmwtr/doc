@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="../../css/style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	    <div id="header_wrapper">
+        <header>
+            <h1><a href="../../index.html">doc</a>.kmwtr.xyz</h1>
+        </header>
+    </div>
+	<article>
+<h1 id="build-u-boot">Build U-Boot</h1>
+<p>Create: 2019/03/27 Update: 2020/07/14</p>
+<div id="toc">
+<h3>Table of Contents</h3>
+<div class="toc">
+<ul>
+<li><a href="#build-u-boot">Build U-Boot</a><ul>
+<li><a href="#_1">前提</a></li>
+<li><a href="#_2">作業概要</a></li>
+<li><a href="#_3">ビルドするファームウェア</a></li>
+<li><a href="#arm-trusted-firmware-atf">ARM Trusted Firmware (ATF)</a></li>
+<li><a href="#u-boot">U-Boot</a><ul>
+<li><a href="#_4">概要</a></li>
+<li><a href="#_5">ビルド</a></li>
+</ul>
+</li>
+<li><a href="#boot-process">Boot process</a></li>
+<li><a href="#sd">SDカードに焼く</a></li>
+<li><a href="#u-boot-spl">U-Boot SPL のログ</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+</div>
+<h2 id="_1">前提</h2>
+<p>U-Bootのバージョン</p>
+<ul>
+<li><a href="https://elixir.bootlin.com/u-boot/v2019.01/source">v2019.01</a></li>
+<li><a href="https://github.com/Icenowy/u-boot">Icenowy/u-boot</a></li>
+</ul>
+<p>資料</p>
+<ul>
+<li><a href="https://github.com/u-boot/u-boot/blob/master/board/sunxi/README.sunxi64">/board/sunxi/README.sunxi64</a></li>
+</ul>
+<h2 id="_2">作業概要</h2>
+<blockquote>
+<p>Build the ARM Trusted Firmware binary (see "ARM Trusted Firmware (ATF)" below)</p>
+</blockquote>
+<pre><code class="Bash">$ cd /src/arm-trusted-firmware
+$ make PLAT=sun50i_a64 DEBUG=1 bl31
+</code></pre>
+
+<blockquote>
+<p>Build U-Boot (see "SPL/U-Boot" below)</p>
+</blockquote>
+<pre><code class="Bash">$ export BL31=/path/to/bl31.bin
+$ make pine64_plus_defconfig &amp;&amp; make -j5
+</code></pre>
+
+<blockquote>
+<p>Transfer to an uSD card (see "microSD card" below)</p>
+</blockquote>
+<pre><code class="Bash">$ dd if=u-boot-sunxi-with-spl.bin of=/dev/sdx bs=8k seek=1
+</code></pre>
+
+<h2 id="_3">ビルドするファームウェア</h2>
+<p>以下３つ。</p>
+<ul>
+<li>ARM Trusted Firmware (ATF)</li>
+<li>U-Boot SPL</li>
+<li>U-Boot</li>
+</ul>
+<p>SPLがATFとU-Boot本体をロードする。</p>
+<h2 id="arm-trusted-firmware-atf">ARM Trusted Firmware (ATF)</h2>
+<ol>
+<li>Github からダウンロード。</li>
+</ol>
+<pre><code class="Bash">$ git clone https://github.com/ARM-software/arm-trusted-firmware.git
+$ ls
+arm-trusted-firmware
+</code></pre>
+
+<ol>
+<li>make build する。</li>
+</ol>
+<pre><code>$ make CROSS_COMPILE=aarch64-linux-gnu- PLAT=sun50i_h6 DEBUG=1 bl31
+</code></pre>
+
+<ul>
+<li><code>DEBUG=0</code> でリリースビルド。単に<code>DEBUG=1</code>を抜くだけでもリリースビルドになる。U-bootのサイズを節約したいならリリースビルドが役に立つ、との事。（確認したところ、41.4KB と33.2KBの違いだった。）</li>
+<li>H6は<code>sun50i_h6</code>、A64とH5なら<code>sun50i_a64</code>となる。</li>
+</ul>
+<p><strong>事前に必要なもの</strong></p>
+<pre><code>$ sudo apt install gcc-aarch64-linux-gnu make
+</code></pre>
+
+<ol>
+<li>環境変数に登録</li>
+</ol>
+<blockquote>
+<p>The resulting binary is build/sun50i_a64/debug/bl31.bin. Either put the location of this file into the BL31 environment variable or copy this to the root of your U-Boot build directory (or create a symbolic link).</p>
+</blockquote>
+<p>U-bootディレクトリ直下にbl31.binを置く、でも良いとの事。</p>
+<pre><code class="Bash">$ export BL31=~/Schale/arm-trusted-firmware/build/sun50i_h6/release/bl31.bin
+または
+$ export BL31=~/Schale/arm-trusted-firmware/build/sun50i_h6/debug/bl31.bin
+</code></pre>
+
+<p>確認したかったら <code>printenv</code> 。</p>
+<h2 id="u-boot">U-Boot</h2>
+<h3 id="_4">概要</h3>
+<blockquote>
+<p>Both U-Boot proper and the SPL are using the 64-bit mode.</p>
+</blockquote>
+<p>U-BootはSPLも本体も64bitモードで動く。</p>
+<blockquote>
+<p>As the boot ROM enters the SPL still in AArch32 secure SVC mode, there is some shim code to enter AArch64 very early. The rest of the SPL runs in AArch64 EL3.
+U-Boot proper runs in EL2 and can load any AArch64 code (using the "go" command), EFI applications (with "bootefi") or arm64 Linux kernel images (often named "Image"), using the "booti" command.</p>
+</blockquote>
+<p>Boot ROM は AArch32 secure SVC モードで SPL にエントリし、非常に早い段階で AArch64 モードに移行する。SPLの後半では SPL はAArch64 EL3 で走る。
+U-Boot 本体は EL2 で走り、あらゆる AArch64 コードやEFIアプリケーション、arm64 Linux kernel イメージをロードすることができる。</p>
+<p>U-Bootが用意している各種コードの実行コマンド
+- AArch64 コード: using the "go" command
+- EFIアプリケーション: with "bootefi"
+- arm64 Linux kernel イメージ: often named "Image"</p>
+<p>SVC モード？</p>
+<blockquote>
+<p>ARMプロセッサの持つ動作モードの一つで，スーパバイザ・モードとも呼ばれます．SVCモードは特権モードで，OSのカーネルは通常このモードで動作します．
+http://mix.kumikomi.net/index.php/SVC%E3%83%A2%E3%83%BC%E3%83%89</p>
+</blockquote>
+<p>EL2? EL3?</p>
+<blockquote>
+<p>ARMv8ではEL0からEL3の4つの割り込みレベルを持ち、EL0は割り込みのない通常のアプリケーション実行レベルである。そして、アプリケーションの実行時に割り込みが起こるとEL1に移行し、このレベルではゲストOSが走る。そして、ゲストOSの実行中に割り込みが起こるとEL2に移行し、このレベルではVMM(仮想マシンモニタ。ハイパバイザとも呼ばれる)が実行される。VMMの実行中に割り込みが起こるとEL3に移行し、このレベルではTrustZoneのモニタが実行されるという風に、セキュリティの各レベルに割り込みレベルを対応させ、安全性を高めることができるようになっている。
+https://news.mynavi.jp/article/20111031-arm_v8/2</p>
+</blockquote>
+<h3 id="_5">ビルド</h3>
+<p><strong>ビルド設定</strong></p>
+<p>まずはこれ。</p>
+<pre><code class="Bash">$ make clean
+$ export CROSS_COMPILE=aarch64-linux-gnu-
+</code></pre>
+
+<p>Orangepi one plus なら、</p>
+<pre><code class="Bash">$ make orangepi_one_plus_defconfig
+</code></pre>
+
+<p>TUIで確認したいなら、</p>
+<pre><code class="Bash">$ make menuconfig
+</code></pre>
+
+<p>menuconfig に必要なもの</p>
+<pre><code class="bash">$ sudo apt install libncurses-dev bison flex
+</code></pre>
+
+<p><strong>ビルド</strong></p>
+<pre><code class="Bash">$ make -j8
+</code></pre>
+
+<p>事前に必要なもの</p>
+<pre><code class="Bash">$ sudo apt install swig python-dev gcc
+$ sudo apt install g++-arm-linux-gnueabihf // 関係ない？
+</code></pre>
+
+<p>普通のgccが必要だった。（普通の？ python や python3 が入ってるだけではだめだった。）</p>
+<p>log</p>
+<pre><code>./tools/mkimage: Can't open u-boot.itb.tmp: No such file or directory
+Makefile:1102: recipe for target 'u-boot.itb' failed
+</code></pre>
+
+<p>itb とは？</p>
+<p>ITB (Image Tree Blob)</p>
+<blockquote>
+<p>Kernel Image, Ramdisk, DTB (Device Tree Blob) を一つにまとめた ITB というのを作ります。 ITB を作るには、 ITS(Image Tree Source) を記述して、 mkimage に食わせます。</p>
+</blockquote>
+<p>Linux カーネルを起動するためのもの？</p>
+<p>直すには、fit.itbを作って、configファイルにこれを書く？</p>
+<pre><code>CONFIG_SPL_FIT_SOURCE=&quot;board/ここにパス。&quot;
+</code></pre>
+
+<p>sunxi がなんかスクリプトを用意してる。何なのかはわからない。
+/board/sunxi/mksunxi_fit_atf.sh</p>
+<p><strong>成果物</strong></p>
+<pre><code>spl/sunxi-spl.bin
+u-boot.img
+</code></pre>
+
+<h2 id="boot-process">Boot process</h2>
+<p>典型的なブート手順</p>
+<blockquote>
+<p>1) Reading 32KB from sector 16 (@8K) of the microSD card to SRAM A1. If the BROM finds the magic "eGON" header in the first bytes, it will execute that code. If not (no SD card at all or invalid magic), it will:</p>
+</blockquote>
+<p>BROM は microSD の sector 16(@8K) から32KBを読んで SRAM A1 に展開し実行する。</p>
+<h2 id="sd">SDカードに焼く</h2>
+<p>sdカードを見つける。</p>
+<pre><code class="Bash">$ sudo fdisk -l
+
+Disk /dev/sdb: 14.9 GiB, 15931539456 bytes, 31116288 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x500a0dff
+
+Device     Boot      Start        End    Sectors   Size Id Type
+/dev/sdb1       1948285285 3650263507 1701978223 811.6G 6e unknown
+/dev/sdb2                0          0          0     0B 74 unknown
+/dev/sdb4         28049408   28049848        441 220.5K  0 Empty
+</code></pre>
+
+<p>linux 上でフォーマットするとパーティションが一つになってきれいになった。
+Ubuntu のディスクユーティリティで何もかも消すともっときれいになった。(パーティションなし（空）)</p>
+<pre><code class="bash">$ sudo fdisk -l
+
+Disk /dev/sdb: 120.5 MiB, 126353408 bytes, 246784 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+</code></pre>
+
+<p>それぞれ書き込む。</p>
+<p><strong>U-Boot SPL (8KiB *1Block == 8KiB~</strong></p>
+<pre><code class="Bash">sudo dd if=spl/sunxi-spl.bin of=/dev/sdb bs=8k seek=1
+</code></pre>
+
+<p>log</p>
+<pre><code>4+0 records in
+4+0 records out
+32768 bytes (33 kB, 32 KiB) copied, 0.00464341 s, 7.1 MB/s
+</code></pre>
+
+<p><strong>U-Boot (8KiB * 5Block == 40KiB~</strong></p>
+<pre><code class="Bash">sudo dd if=u-boot.img of=/dev/sdb bs=8k seek=5
+</code></pre>
+
+<p>log</p>
+<pre><code>57+1 records in
+57+1 records out
+469864 bytes (470 kB, 459 KiB) copied, 0.117844 s, 4.0 MB/s
+</code></pre>
+
+<h2 id="u-boot-spl">U-Boot SPL のログ</h2>
+<p>SPL だけの場合</p>
+<pre><code>U-Boot SPL 2019.01-rc3-00046-gc9e257a911-dirty (Jan 13 2019 - 23:58:06 +0900)
+DRAM: 1024 MiB
+Trying to boot from MMC1
+</code></pre>
+
+<p>そのあとこんな感じでループ。</p>
+<pre><code>&quot;Synchronous Abort&quot; handler, esr 0x02000000
+elr: 000000004a000000 lr : 00000000000229e4
+x 0: 000000004a000000 x 1: 000000004fdffd30
+x 2: 0000000000000000 x 3: 00000000000267a0
+x 4: 0000000000000000 x 5: 0000000000000000
+x 6: 0000000000000015 x 7: 000000004fd001a0
+x 8: 000000000064000d x 9: 4070edee00000000
+x10: 2402000700000000 x11: 0000000000000000
+x12: fe0201c20007fffe x13: 1a04852805658800
+x14: 018032e000453418 x15: 60920900510050d0
+x16: 2018c70b42b8c148 x17: 1c0a20fa08c08c89
+x18: 000000004fdffe80 x19: 0000000000027ed0
+x20: 0000000000027e88 x21: 0000000000000000
+x22: 000000004fdffe28 x23: 000000004fdffe40
+x24: 0000000000027635 x25: 000000000002761d
+x26: 0000000000027000 x27: 00000000deadbeef
+x28: 000000004fdffe28 x29: 000000004fdffda0
+
+Resetting CPU ...
+
+resetting ...
+</code></pre>
+</article>
+</body>
+
+</html>

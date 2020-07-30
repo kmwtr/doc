@@ -42,7 +42,7 @@ h1, h2, h3, h4{
 }
 
 h1{
-	margin: 0 0 1.5em 0;
+	margin: 0;
 	font-size: 180%;
 	border-bottom: 2px solid black;
 }
@@ -143,7 +143,6 @@ blockquote{
     font-style: italic;
     background: #ececec;
     border-left: 0.5em solid #b8cfe5;
-	border-radius: 6px;
 }
 
 /* --------------- */
@@ -190,7 +189,7 @@ header a:hover {
 }
 
 #toc h3{
-	color: gray;
+	color: rgb(125, 146, 155);
 	border-bottom: 1px dashed gray;
 	margin: 0 0 1.0em 0;
 }
