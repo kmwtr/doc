@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>{TITLE}</title>
+    <link href="../../css/favicon-32.png" rel="icon" type="image/png">
+    <link href="../../css/style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="header_wrapper">
+        <header>
+            <h1><a href="../../index.html">doc</a>.<a href="http://kmwtr.xyz">kmwtr</a>.xyz</h1>
+            <nav>{DIR}</nav>
+        </header>
+    </div>
+
+    <div id="content_wrapper">
+        <article>
+
+            <h1 id="TITLE">Tutorial</h1>
+            <p>This tutorial introduces you to the concepts and features of the Bottle web framework and covers basic and advanced topics alike. You can read it from start to end, or use it as a reference later on. The automatically generated API Reference may be interesting for you, too. It covers more details, but explains less than this tutorial. Solutions for the most common questions can be found in our Recipes collection or on the Frequently Asked Questions page. If you need any help, join our mailing list or visit us in our IRC channel.</p>
+            
+            <h2 id="{H2}">INSTALLATION</h2>
+            <p>Bottle does not depend on any external libraries. You can just download bottle.py into your project directory and start coding:</p>
+            <pre><code>{CODE}</code></pre>
+            <h3>これはH3要素</h3>
+            <ul>{UL}</ul>
+            <ol>{OL_LI}</ol>
+            <h4>H6 Memory Mapping sこれはh4要素</h4>
+            <table>
+                <thead>
+                <tr>
+                <th>Module</th>
+                <th>Address Start</th>
+                <th>Address End</th>
+                <th>Size(Bytes)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <td>N-BROM</td>
+                <td>0x0000 0000</td>
+                <td>0x0000 9FFF</td>
+                <td>40K</td>
+                </tr>
+                <tr>
+                <td>S-BROM</td>
+                <td>0x0000 0000</td>
+                <td>0x0000 FFFF</td>
+                <td>64K</td>
+                </tr>
+                <tr>
+                <td>SRAM A1</td>
+                <td>0x0002 0000</td>
+                <td>0x0002 7FFF</td>
+                <td>32K</td>
+                </tr>
+                <tr>
+                <td>SRAM C</td>
+                <td>0x0002 8000</td>
+                <td>0x0004 5FFF</td>
+                <td>120K</td>
+                </tr>
+                <tr>
+                <td>SRAM A2</td>
+                <td>0x0010 0000</td>
+                <td>0x0010 3FFF</td>
+                <td>16K</td>
+                </tr>
+                <tr>
+                <td>"</td>
+                <td>0x0010 4000</td>
+                <td>0x0011 7FFF</td>
+                <td>80K</td>
+                </tr>
+                <tr>
+                <td>DE</td>
+                <td>0x0100 0000</td>
+                <td>0x013F FFFF</td>
+                <td>4M</td>
+                </tr>
+                <tr>
+                <td>DI0</td>
+                <td>0x0142 0000</td>
+                <td>0x0143 FFFF</td>
+                <td>128K</td>
+                </tr>
+                <tr>
+                <td>GPU</td>
+                <td>0x0180 0000</td>
+                <td>0x0183 FFFF</td>
+                <td>256K</td>
+                </tr>
+                <tr>
+                <td>CE_NS</td>
+                <td>0x0190 4000</td>
+                <td>0x0190 47FF</td>
+                <td>2K</td>
+                </tr>
+                <tr>
+                <td>CE_S</td>
+                <td>0x0190 4800</td>
+                <td>0x0190 4FFF</td>
+                <td>2K</td>
+                </tr>
+                <tr>
+                <td>EMCE</td>
+                <td>0x0190 5000</td>
+                <td>0x0190 5FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>CE_KEY_SRAM</td>
+                <td>0x0190 8000</td>
+                <td>0x0190 8FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>VE SRAM</td>
+                <td>0x01A0 0000</td>
+                <td>0x01BF FFFF</td>
+                <td>2M</td>
+                </tr>
+                <tr>
+                <td>VP9</td>
+                <td>0x01C0 0000</td>
+                <td>0x01C0 0FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>VE</td>
+                <td>0x01C0 E000</td>
+                <td>0x01C0 FFFF</td>
+                <td>8K</td>
+                </tr>
+                <tr>
+                <td>SYS_CFG</td>
+                <td>0x0300 0000</td>
+                <td>0x0300 0FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>CCU</td>
+                <td>0x0300 1000</td>
+                <td>0x0300 1FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>DMAC</td>
+                <td>0x0300 2000</td>
+                <td>0x0300 2FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>MSGBOX</td>
+                <td>0x0300 3000</td>
+                <td>0x0300 3FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>SPINLOCK</td>
+                <td>0x0300 4000</td>
+                <td>0x0300 4FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>HSTIMER</td>
+                <td>0x0300 5000</td>
+                <td>0x0300 5FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>SID</td>
+                <td>0x0300 6000</td>
+                <td>0x0300 6FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>TIMER</td>
+                <td>0x0300 9000</td>
+                <td>0x0300 93FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>PWM</td>
+                <td>0x0300 A000</td>
+                <td>0x0300 A3FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>GPIO</td>
+                <td>0x0300 B000</td>
+                <td>0x0300 B3FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>PSI</td>
+                <td>0x0300 C000</td>
+                <td>0x0300 C3FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>DCU</td>
+                <td>0x0301 0000</td>
+                <td>0x0301 FFFF</td>
+                <td>64K</td>
+                </tr>
+                <tr>
+                <td>GIC</td>
+                <td>0x0302 0000</td>
+                <td>0x0302 FFFF</td>
+                <td>64K</td>
+                </tr>
+                <tr>
+                <td>IOMMU</td>
+                <td>0x030F 0000</td>
+                <td>0x030F FFFF</td>
+                <td>64K</td>
+                </tr>
+                <tr>
+                <td>DRAM_CTRL</td>
+                <td>0x0400 2000</td>
+                <td>0x0400 5FFF</td>
+                <td>16K</td>
+                </tr>
+                <tr>
+                <td>NAND0</td>
+                <td>0x0401 1000</td>
+                <td>0x0401 1FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>SMHC0</td>
+                <td>0x0402 0000</td>
+                <td>0x0402 0FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>SMHC1</td>
+                <td>0x0402 1000</td>
+                <td>0x0402 1FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>SMHC2</td>
+                <td>0x0402 2000</td>
+                <td>0x0402 2FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>UART0</td>
+                <td>0x0500 0000</td>
+                <td>0x0500 03FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>UART1</td>
+                <td>0x0500 0400</td>
+                <td>0x0500 07FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>UART2</td>
+                <td>0x0500 0800</td>
+                <td>0x0500 0BFF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>UART3</td>
+                <td>0x0500 0C00</td>
+                <td>0x0500 0FFF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>TWI0</td>
+                <td>0x0500 2000</td>
+                <td>0x0500 23FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>TWI1</td>
+                <td>0x0500 2400</td>
+                <td>0x0500 27FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>TWI2</td>
+                <td>0x0500 2800</td>
+                <td>0x0500 2BFF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>TWI3</td>
+                <td>0x0500 2C00</td>
+                <td>0x0500 2FFF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>SCR0</td>
+                <td>0x0500 5000</td>
+                <td>0x0500 53FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>SCR1</td>
+                <td>0x0500 5400</td>
+                <td>0x0500 57FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>SPI0</td>
+                <td>0x0501 0000</td>
+                <td>0x0501 0FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>SPI1</td>
+                <td>0x0501 1000</td>
+                <td>0x0501 1FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>EMAC</td>
+                <td>0x0502 0000</td>
+                <td>0x0502 FFFF</td>
+                <td>64K</td>
+                </tr>
+                <tr>
+                <td>TS0</td>
+                <td>0x0506 0000</td>
+                <td>0x0506 0FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>THS</td>
+                <td>0x0507 0400</td>
+                <td>0x0507 07FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>CIR_TX</td>
+                <td>0x0507 1000</td>
+                <td>0x0507 13FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>I2S/PCM3</td>
+                <td>0x0508 F000</td>
+                <td>0x0508 FFFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>I2S/PCM0</td>
+                <td>0x0509 0000</td>
+                <td>0x0509 0FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>I2S/PCM1</td>
+                <td>0x0509 1000</td>
+                <td>0x0509 1FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>I2S/PCM2</td>
+                <td>0x0509 2000</td>
+                <td>0x0509 2FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>OWA</td>
+                <td>0x0509 3000</td>
+                <td>0x0509 33FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>DMIC</td>
+                <td>0x0509 5000</td>
+                <td>0x0509 53FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>Audio HUB</td>
+                <td>0x0509 7000</td>
+                <td>0x0509 7FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>USB0(USB2.0_OTG)</td>
+                <td>0x0510 0000</td>
+                <td>0x051F FFFF</td>
+                <td>1M</td>
+                </tr>
+                <tr>
+                <td>USB1(USB3.0_HOST)</td>
+                <td>0x0520 0000</td>
+                <td>0x052F FFFF</td>
+                <td>1M</td>
+                </tr>
+                <tr>
+                <td>USB3(USB2.0_HOST)</td>
+                <td>0x0531 1000</td>
+                <td>0x0531 1FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>PCIe</td>
+                <td>0x0540 0000</td>
+                <td>0x054F FFFF</td>
+                <td>1M</td>
+                </tr>
+                <tr>
+                <td>HDMI_TX0(1.4/2.0)</td>
+                <td>0x0600 0000</td>
+                <td>0x060F FFFF</td>
+                <td>1M</td>
+                </tr>
+                <tr>
+                <td>DISP_IF_TOP</td>
+                <td>0x0651 0000</td>
+                <td>0x0651 0FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>TCON_LCD</td>
+                <td>0x0651 1000</td>
+                <td>0x0651 1FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>TCON_TV</td>
+                <td>0x0651 5000</td>
+                <td>0x0651 5FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>CSI_SRAM</td>
+                <td>0x0660 0000</td>
+                <td>0x0661 FFFF</td>
+                <td>128K</td>
+                </tr>
+                <tr>
+                <td>CSI</td>
+                <td>0x0662 0000</td>
+                <td>0x0663 FFFF</td>
+                <td>128K</td>
+                </tr>
+                <tr>
+                <td>RTC</td>
+                <td>0x0700 0000</td>
+                <td>0x0700 03FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>R_CPUS_CFG</td>
+                <td>0x0700 0400</td>
+                <td>0x0700 0BFF</td>
+                <td>2K</td>
+                </tr>
+                <tr>
+                <td>R_PRCM</td>
+                <td>0x0701 0000</td>
+                <td>0x0701 03FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>R_TIMER</td>
+                <td>0x0702 0000</td>
+                <td>0x0702 03FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>R_WDOG</td>
+                <td>0x0702 0400</td>
+                <td>0x0702 07FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>R_TWDOG</td>
+                <td>0x0702 0800</td>
+                <td>0x0702 0BFF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>R_PWM</td>
+                <td>0x0702 0C00</td>
+                <td>0x0702 0FFF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>R_INTC</td>
+                <td>0x0702 1000</td>
+                <td>0x0702 13FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>R_GPIO</td>
+                <td>0x0702 2000</td>
+                <td>0x0702 23FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>R_CIR_RX</td>
+                <td>0x0704 0000</td>
+                <td>0x0704 03FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>R_OWC</td>
+                <td>0x0704 0400</td>
+                <td>0x0704 07FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>R_UART</td>
+                <td>0x0708 0000</td>
+                <td>0x0708 03FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>R_TWI</td>
+                <td>0x0708 1400</td>
+                <td>0x0708 17FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>CPU_SYS_CFG</td>
+                <td>0x0810 0000</td>
+                <td>0x0810 03FF</td>
+                <td>1K</td>
+                </tr>
+                <tr>
+                <td>CNT_R</td>
+                <td>0x0811 0000</td>
+                <td>0x0811 0FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>CNT_C</td>
+                <td>0x0812 0000</td>
+                <td>0x0812 0FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>C0_CPUX_CFG</td>
+                <td>0x0901 0000</td>
+                <td>0x0901 0FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>C0_CPUX_MBIST</td>
+                <td>0x0902 0000</td>
+                <td>0x0902 0FFF</td>
+                <td>4K</td>
+                </tr>
+                <tr>
+                <td>DRAM SPACE</td>
+                <td>0x4000 0000</td>
+                <td>0xFFFF FFFF</td>
+                <td>3G</td>
+                </tr>
+                </tbody>
+                </table>
+            <h5>これはh5要素</h5>
+            <blockquote>
+                <p>{BQ_P}</p>
+            </blockquote>
+
+            <h2 id="{H2}">{H2}</h2>
+            <p>{P}</p>
+            <pre><code>{CODE}</code></pre>
+            <ul>{UL}</ul>
+            <ol>{OL_LI}</ol>
+            <blockquote>
+                <p>{BQ_P}</p>
+            </blockquote>
+
+            <h2 id="{H2}">{H2}</h2>
+            <p>{P}</p>
+            <pre><code>{CODE}</code></pre>
+            <ul>{UL}</ul>
+            <ol>{OL_LI}</ol>
+            <blockquote>
+                <p>{BQ_P}</p>
+            </blockquote>
+
+            <h2 id="{H2}">{H2}</h2>
+            <p>{P}</p>
+            <pre><code>{CODE}</code></pre>
+            <ul>{UL}</ul>
+            <ol>{OL_LI}</ol>
+            <blockquote>
+                <p>{BQ_P}</p>
+            </blockquote>
+
+            <h2 id="{H2}">{H2}</h2>
+            <p>{P}</p>
+            <pre><code>{CODE}</code></pre>
+            <ul>{UL}</ul>
+            <ol>{OL_LI}</ol>
+            <blockquote>
+                <p>{BQ_P}</p>
+            </blockquote>
+            
+        </article>
+        <nav id="TOC">
+            <h2>TOC</h2>
+
+            <ul>{TOC}</ul>
+            
+        </nav>
+    </div>
+</body>
+
+</html>
