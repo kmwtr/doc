@@ -25,7 +25,16 @@
             
             <h2 id="{H2}">INSTALLATION</h2>
             <p>Bottle does not depend on any external libraries. You can just download bottle.py into your project directory and start coding:</p>
-            <pre><code>{CODE}</code></pre>
+            <pre><code class="Code">#ifndef __ASSEMBLY__
+void sunxi_board_init(void);
+void sunxi_reset(void);
+int sunxi_get_sid(unsigned int *sid);
+#endif
+
+#endif /* _SUNXI_CPU_SUN9I_H */</code></pre>
+            <pre><code class="Bash">$ cd /src/arm-trusted-firmware
+$ make PLAT=sun50i_a64 DEBUG=1 bl31
+</code></pre>
             <h3>これはH3要素</h3>
             <ul>{UL}</ul>
             <ol>{OL_LI}</ol>
