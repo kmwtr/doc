@@ -1,4 +1,4 @@
-# exe ファイルを無視する
+# Files
 *.exe
-# 
+# Directries
 .vscode/
