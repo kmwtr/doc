@@ -17,8 +17,9 @@
 }
 
 #content_wrapper{
+    width: 1200px;
     display: grid;
-    grid-template-columns: 710px 230px;
+    grid-template-columns: 960px 240px;
     column-gap: 0px;
     row-gap: 0px;
     justify-content: center;
@@ -42,8 +43,8 @@ header {
     background: #36424e;
     color: lightgray;
     margin: auto;
-	width: 900px;
-	padding: 20px 10px;
+	width: 1160px;
+	padding: 20px;
 }
 
 article {
@@ -127,6 +128,7 @@ code {
     padding: 1.0em;
     line-height: 1.2em;
     border-radius: 6px;
+    overflow: auto  ;
 }
 
 li code, p code {
