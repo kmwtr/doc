@@ -20,21 +20,32 @@
     <div id="content_wrapper">
         <article>
 
-            <h1 id="TITLE">Tutorial</h1>
+            <h1 id="TITLE">H1 Title</h1>
             <p>This tutorial introduces you to the concepts and features of the Bottle web framework and covers basic and advanced topics alike. You can read it from start to end, or use it as a reference later on. The automatically generated API Reference may be interesting for you, too. It covers more details, but explains less than this tutorial. Solutions for the most common questions can be found in our Recipes collection or on the Frequently Asked Questions page. If you need any help, join our mailing list or visit us in our IRC channel.</p>
             
-            <h2 id="{H2}">INSTALLATION</h2>
+            <h2 id="{H2}">H2 Title</h2>
             <p>Bottle does not depend on any external libraries. You can just download bottle.py into your project directory and start coding:</p>
             <pre><code class="Code">#ifndef __ASSEMBLY__
 void sunxi_board_init(void);
 void sunxi_reset(void);
 int sunxi_get_sid(unsigned int *sid);
 #endif
-
 #endif /* _SUNXI_CPU_SUN9I_H */</code></pre>
             <pre><code class="Bash">$ cd /src/arm-trusted-firmware
 $ make PLAT=sun50i_a64 DEBUG=1 bl31
 </code></pre>
+
+            <h2>RK3399 aka OP1</h2>
+            <p>RK3399は2016年2月に行われたMobile World Congressにおいて、ARMが発表した。2つのCortex-A72 および 4つのCortex-A53による、合わせて6つの 64 bit CPUとなっている。このCPUは「OP1」という名称も持ち、Chromebookへの利用を想定したものとなっている。</p>
+            
+            <p>ここでHEXをアセンブリに変換して確認できる。http://armconverter.com/hextoarm/</p>
+            <p><code>1f0000ea</code> at <code>0x20000</code> は…</p>
+            <ul>
+            <li>AArch32 なら <code>0x20000:  B   #0x20084</code></li>
+            <li>AArch64 なら <code>0x20000:  TST X0, X0</code></li>
+            </ul>
+            <p>これでAArch32状態からAArch64状態へ遷移するはず。</p>
+
             <h3>これはH3要素</h3>
             <ul>{UL}</ul>
             <ol>{OL_LI}</ol>
@@ -259,318 +270,6 @@ $ make PLAT=sun50i_a64 DEBUG=1 bl31
                 <td>0x0402 2FFF</td>
                 <td>4K</td>
                 </tr>
-                <tr>
-                <td>UART0</td>
-                <td>0x0500 0000</td>
-                <td>0x0500 03FF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>UART1</td>
-                <td>0x0500 0400</td>
-                <td>0x0500 07FF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>UART2</td>
-                <td>0x0500 0800</td>
-                <td>0x0500 0BFF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>UART3</td>
-                <td>0x0500 0C00</td>
-                <td>0x0500 0FFF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>TWI0</td>
-                <td>0x0500 2000</td>
-                <td>0x0500 23FF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>TWI1</td>
-                <td>0x0500 2400</td>
-                <td>0x0500 27FF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>TWI2</td>
-                <td>0x0500 2800</td>
-                <td>0x0500 2BFF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>TWI3</td>
-                <td>0x0500 2C00</td>
-                <td>0x0500 2FFF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>SCR0</td>
-                <td>0x0500 5000</td>
-                <td>0x0500 53FF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>SCR1</td>
-                <td>0x0500 5400</td>
-                <td>0x0500 57FF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>SPI0</td>
-                <td>0x0501 0000</td>
-                <td>0x0501 0FFF</td>
-                <td>4K</td>
-                </tr>
-                <tr>
-                <td>SPI1</td>
-                <td>0x0501 1000</td>
-                <td>0x0501 1FFF</td>
-                <td>4K</td>
-                </tr>
-                <tr>
-                <td>EMAC</td>
-                <td>0x0502 0000</td>
-                <td>0x0502 FFFF</td>
-                <td>64K</td>
-                </tr>
-                <tr>
-                <td>TS0</td>
-                <td>0x0506 0000</td>
-                <td>0x0506 0FFF</td>
-                <td>4K</td>
-                </tr>
-                <tr>
-                <td>THS</td>
-                <td>0x0507 0400</td>
-                <td>0x0507 07FF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>CIR_TX</td>
-                <td>0x0507 1000</td>
-                <td>0x0507 13FF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>I2S/PCM3</td>
-                <td>0x0508 F000</td>
-                <td>0x0508 FFFF</td>
-                <td>4K</td>
-                </tr>
-                <tr>
-                <td>I2S/PCM0</td>
-                <td>0x0509 0000</td>
-                <td>0x0509 0FFF</td>
-                <td>4K</td>
-                </tr>
-                <tr>
-                <td>I2S/PCM1</td>
-                <td>0x0509 1000</td>
-                <td>0x0509 1FFF</td>
-                <td>4K</td>
-                </tr>
-                <tr>
-                <td>I2S/PCM2</td>
-                <td>0x0509 2000</td>
-                <td>0x0509 2FFF</td>
-                <td>4K</td>
-                </tr>
-                <tr>
-                <td>OWA</td>
-                <td>0x0509 3000</td>
-                <td>0x0509 33FF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>DMIC</td>
-                <td>0x0509 5000</td>
-                <td>0x0509 53FF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>Audio HUB</td>
-                <td>0x0509 7000</td>
-                <td>0x0509 7FFF</td>
-                <td>4K</td>
-                </tr>
-                <tr>
-                <td>USB0(USB2.0_OTG)</td>
-                <td>0x0510 0000</td>
-                <td>0x051F FFFF</td>
-                <td>1M</td>
-                </tr>
-                <tr>
-                <td>USB1(USB3.0_HOST)</td>
-                <td>0x0520 0000</td>
-                <td>0x052F FFFF</td>
-                <td>1M</td>
-                </tr>
-                <tr>
-                <td>USB3(USB2.0_HOST)</td>
-                <td>0x0531 1000</td>
-                <td>0x0531 1FFF</td>
-                <td>4K</td>
-                </tr>
-                <tr>
-                <td>PCIe</td>
-                <td>0x0540 0000</td>
-                <td>0x054F FFFF</td>
-                <td>1M</td>
-                </tr>
-                <tr>
-                <td>HDMI_TX0(1.4/2.0)</td>
-                <td>0x0600 0000</td>
-                <td>0x060F FFFF</td>
-                <td>1M</td>
-                </tr>
-                <tr>
-                <td>DISP_IF_TOP</td>
-                <td>0x0651 0000</td>
-                <td>0x0651 0FFF</td>
-                <td>4K</td>
-                </tr>
-                <tr>
-                <td>TCON_LCD</td>
-                <td>0x0651 1000</td>
-                <td>0x0651 1FFF</td>
-                <td>4K</td>
-                </tr>
-                <tr>
-                <td>TCON_TV</td>
-                <td>0x0651 5000</td>
-                <td>0x0651 5FFF</td>
-                <td>4K</td>
-                </tr>
-                <tr>
-                <td>CSI_SRAM</td>
-                <td>0x0660 0000</td>
-                <td>0x0661 FFFF</td>
-                <td>128K</td>
-                </tr>
-                <tr>
-                <td>CSI</td>
-                <td>0x0662 0000</td>
-                <td>0x0663 FFFF</td>
-                <td>128K</td>
-                </tr>
-                <tr>
-                <td>RTC</td>
-                <td>0x0700 0000</td>
-                <td>0x0700 03FF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>R_CPUS_CFG</td>
-                <td>0x0700 0400</td>
-                <td>0x0700 0BFF</td>
-                <td>2K</td>
-                </tr>
-                <tr>
-                <td>R_PRCM</td>
-                <td>0x0701 0000</td>
-                <td>0x0701 03FF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>R_TIMER</td>
-                <td>0x0702 0000</td>
-                <td>0x0702 03FF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>R_WDOG</td>
-                <td>0x0702 0400</td>
-                <td>0x0702 07FF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>R_TWDOG</td>
-                <td>0x0702 0800</td>
-                <td>0x0702 0BFF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>R_PWM</td>
-                <td>0x0702 0C00</td>
-                <td>0x0702 0FFF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>R_INTC</td>
-                <td>0x0702 1000</td>
-                <td>0x0702 13FF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>R_GPIO</td>
-                <td>0x0702 2000</td>
-                <td>0x0702 23FF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>R_CIR_RX</td>
-                <td>0x0704 0000</td>
-                <td>0x0704 03FF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>R_OWC</td>
-                <td>0x0704 0400</td>
-                <td>0x0704 07FF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>R_UART</td>
-                <td>0x0708 0000</td>
-                <td>0x0708 03FF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>R_TWI</td>
-                <td>0x0708 1400</td>
-                <td>0x0708 17FF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>CPU_SYS_CFG</td>
-                <td>0x0810 0000</td>
-                <td>0x0810 03FF</td>
-                <td>1K</td>
-                </tr>
-                <tr>
-                <td>CNT_R</td>
-                <td>0x0811 0000</td>
-                <td>0x0811 0FFF</td>
-                <td>4K</td>
-                </tr>
-                <tr>
-                <td>CNT_C</td>
-                <td>0x0812 0000</td>
-                <td>0x0812 0FFF</td>
-                <td>4K</td>
-                </tr>
-                <tr>
-                <td>C0_CPUX_CFG</td>
-                <td>0x0901 0000</td>
-                <td>0x0901 0FFF</td>
-                <td>4K</td>
-                </tr>
-                <tr>
-                <td>C0_CPUX_MBIST</td>
-                <td>0x0902 0000</td>
-                <td>0x0902 0FFF</td>
-                <td>4K</td>
-                </tr>
-                <tr>
-                <td>DRAM SPACE</td>
-                <td>0x4000 0000</td>
-                <td>0xFFFF FFFF</td>
-                <td>3G</td>
-                </tr>
                 </tbody>
                 </table>
             <h5>これはh5要素</h5>
@@ -615,6 +314,7 @@ $ make PLAT=sun50i_a64 DEBUG=1 bl31
             </blockquote>
             
         </article>
+
         <nav id="TOC">
             <h2>TOC</h2>
 

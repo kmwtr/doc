@@ -16,8 +16,21 @@
     font-weight: 400;
 }
 
+body {
+    background: White;
+    color: Black;
+    text-align: left;
+    font-family: 'Yu Gothic Medium', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+    line-height: 1.6em;
+}
+
+#header_wrapper {
+    background: #36424e;
+}
+
 #content_wrapper{
     width: 1200px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 960px 240px;
     column-gap: 0px;
@@ -27,28 +40,15 @@
 
 /* --------------- */
 
-body {
-    background: White;
-    color: Black;
-    text-align: left;
-    font-family: 'Yu Gothic Medium', "Hiragino Sans", sans-serif;
-    line-height: 1.6em;
-}
-
-#header_wrapper {
-    background: #36424e;
-}
-
 header {
-    background: #36424e;
+    width: 1120px;
+    margin: 0 auto;
+	padding: 10px 40px;
     color: lightgray;
-    margin: auto;
-	width: 1160px;
-	padding: 20px;
 }
 
 article {
-	padding: 20px;
+	padding: 20px 40px;
     margin: 0px;
 }
 
@@ -123,11 +123,11 @@ code {
     display: block;
     font-family: 'Source Code Pro', monospace;
     font-size: 90%;
-    background: #e4eddf;
+    background: #dae5d3;
     margin: 0.5em 0;
     padding: 1.0em;
     line-height: 1.2em;
-    border-radius: 6px;
+    border-radius: 4px;
     overflow: auto  ;
 }
 
@@ -140,7 +140,7 @@ li code, p code {
 }
 
 .bash, .Bash {
-    background: #4c5966;
+    background: #434e59;
     color: white;
 }
 
@@ -228,11 +228,11 @@ header a:hover {
 
 #TOC {
     color: #667483;
-    margin: 80px 0 0 -10px;
+    margin-top: 80px;
     position: sticky;
     top: 10px;
-    background-color: #e4edf2;
-    border-radius: 6px;
+    background-color: #dfecf2;
+    border-radius: 4px;
 }
 
 #TOC h3 {
