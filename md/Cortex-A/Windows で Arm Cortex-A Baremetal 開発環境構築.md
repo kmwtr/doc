@@ -1,7 +1,3 @@
-# ✅Windows で Arm Cortex-A Baremetal 開発環境構築
-
-### TOC
-
 ## 0. ダウンロードリンク
 
 必要なもの
@@ -82,7 +78,7 @@ Git for Windows のGit Bash がとても便利。コマンドプロンプトで�
 
 ショートカット（タスクバーなどの）のプロパティで、実行時の初期ディレクトリを設定することもできる。
 
-![clipboard.png](OpdutuABO-clipboard.png)
+![clipboard.png](img/OpdutuABO)
 
 ## (5. 感想)
 
