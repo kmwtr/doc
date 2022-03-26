@@ -93,5 +93,5 @@ Windows環境でもBashコマンドを使いたい。Git for Windows の Git Bas
 
 ショートカット（タスクバーなどの）のプロパティで、実行時の初期ディレクトリを設定することができる。
 
-![clipboard.png](inkdrop://file:OpdutuABO)
+![clipboard.png](https://raw.githubusercontent.com/kmwtr/kmwtr_doc/master/md/Cortex-A/img/OpdutuABO-clipboard.png)
 
