@@ -79,7 +79,7 @@ RC4で暗号化された`header0_info`は、Armbian等の様々なイメージ�
 
 #### メモ：復号に使ったツール
 
-![clipboard.png](inkdrop://file:3DWmKkwa6)
+![clipboard.png](https://raw.githubusercontent.com/kmwtr/kmwtr_doc/master/md/Cortex-A/img/3DWmKkwa6.png)
 
 ### 2. SPL | Offset 0x8000 + 0x800 (init_offset = 0x00000004)
 
@@ -192,5 +192,5 @@ SRAM は位置 `0xfff80000` にある。SRAM の `0xfff80010`から始まるよ�
 catでバイナリを結合する処理をMakefileに入れた。
 
 
-![200912_RK.gif](inkdrop://file:YssuU7C02)
+![200912_RK.gif](https://raw.githubusercontent.com/kmwtr/kmwtr_doc/master/md/Cortex-A/img/YssuU7C02.gif)
 おめでとう！
