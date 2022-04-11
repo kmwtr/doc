@@ -6,8 +6,6 @@ topics: ["ARM","Cortex-A", "Baremetal", "C/C++"]
 published: true # 公開設定（falseにすると下書き）
 ---
 
-#### TOC
-
 
 ## 0. ダウンロードリンク
 
