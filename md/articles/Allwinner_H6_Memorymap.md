@@ -5,6 +5,7 @@ type:  "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["ARM","Allwinner", "Baremetal", "H6"]
 published: true # 公開設定（falseにすると下書き）
 ---
+# Allwinner H6 Memorymap
 
 ## Register BaseAddress
 
