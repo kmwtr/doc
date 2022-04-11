@@ -1,6 +1,6 @@
 ---
 title: "Windows上でArm Cortex-Aベアメタル開発環境構築"
-emoji: "😸"
+emoji: "⛏️"
 type:  "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["ARM","Cortex-A", "Baremetal", "C/C++"]
 published: true # 公開設定（falseにすると下書き）
