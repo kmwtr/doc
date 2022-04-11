@@ -1,5 +1,5 @@
 ---
-title: "Allwinner_H6_Memorymap"
+title: "Allwinner H6 Memorymap"
 emoji: "😸"
 type:  "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["ARM","Allwinner", "Baremetal", "H6"]
